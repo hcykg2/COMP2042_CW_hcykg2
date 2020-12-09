@@ -13,23 +13,19 @@ public abstract class Actor extends ImageView{
     }
     
     public int getGridX() {
-    	return (int) (getX() - World.gridOffsetX)/World.gridSize;
+    	return (int) (getX() + World.gridSize/2 - World.gridOffsetX)/World.gridSize;
     }
     
     public int getGridY() {
     	return (int) (getY() - World.gridOffsetX)/World.gridSize;
     }
     
-    public void setGridX(int x) {
-    	setX(x * World.gridSize + World.gridOffsetX);
+    public void setGridX(int coordinate) {
+    	setX(coordinate * World.gridSize + World.gridOffsetX);
     }
     
-    public double getCoordinateOfGridX(int x) {
-    	return x * World.gridSize + World.gridOffsetX;
-    }
-    
-    public double getCoordinateOfGridY(int y) {
-    	return y * World.gridSize + World.gridOffsetX;
+    public double getCoordinateOfGrid(int coordinate) {
+    	return coordinate * World.gridSize + World.gridOffsetX;
     }
 
     public World getWorld() {

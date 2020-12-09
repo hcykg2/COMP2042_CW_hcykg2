@@ -26,7 +26,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {	
 	    background = new MyStage();
-	    Scene scene  = new Scene(background,896,960);
+	    Scene scene  = new Scene(background,896,896);
 	    
 	    animal = new Frog("file:src/assets/frogUp.png");
 

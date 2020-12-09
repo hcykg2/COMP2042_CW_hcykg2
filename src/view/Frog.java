@@ -15,16 +15,14 @@ public class Frog extends Actor {
 	Image imgW2;
 	int points = 0;
 	int end = 0;
-	private boolean second = false;
 	boolean noMove = false;
 	
 	
 	static double speedX = 3;
-	static double speedY = 3;
 	boolean isMoving = false;
+	private int direction = 0;
 	
 	double movement = 13.3333333*2;
-	double movementX = 10.666666*2;
 	int imgSize = World.gridSize;
 	boolean carDeath = false;
 	boolean waterDeath = false;
@@ -38,29 +36,29 @@ public class Frog extends Actor {
 	public Frog(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
 		setX(0);
-		setY(896);
+		setY(832);
 		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
-		imgW2 = new Image("file:src/assets/froggerUpJump.png", imgSize, imgSize, true, true);
+		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
-				if (noMove) {
-					
+				if (!isMoving) {
+					if (event.getCode() == KeyCode.W) {	            	
+		                setDirection(0);
+		                moveUp.start();
+		            }
+		            else if (event.getCode() == KeyCode.A) {
+		            	setDirection(3);
+		                moveUp.start();
+		            }
+		            else if (event.getCode() == KeyCode.S) {	            	
+		            	setDirection(2);
+		                moveUp.start();
+		            }
+		            else if (event.getCode() == KeyCode.D) {
+		            	setDirection(1);
+		                moveUp.start();
+		            }
 				}
-				else {
-					
-				if (event.getCode() == KeyCode.W) {	            	
-	                transitionGrid(0);
-	            }
-	            else if (event.getCode() == KeyCode.A) {
-	            	transitionGrid(1);
-	            }
-	            else if (event.getCode() == KeyCode.S) {	            	
-	            	 transitionGrid(2);
-	            }
-	            else if (event.getCode() == KeyCode.D) {
-	            	 transitionGrid(3);
-	            }
-	        }
 			}
 		});	
 	}
@@ -68,115 +66,61 @@ public class Frog extends Actor {
 	// GRID MOVEMENT
 	
 	AnimationTimer moveUp = new AnimationTimer() {
-		int targetGridY;
-		double targetCoordinateY;
+		int targetGrid;
+		double targetCoordinate;
 		
 		@Override
 		public void handle(long now) {
 			
-			setRotate(0);
 			if (!isMoving) {
-				targetGridY = getGridY() - 1;
-				targetCoordinateY = getCoordinateOfGridY(targetGridY);
+				setImage(imgW2);
+				if (direction == 0) {
+					targetGrid = getGridY() - 1;
+				} else if (direction == 1) {
+					targetGrid = getGridX() + 1;
+				} else if (direction == 2) {
+					targetGrid = getGridY() + 1;
+				} else if (direction == 3) {
+					targetGrid = getGridX() - 1;
+				}
+				targetCoordinate = getCoordinateOfGrid(targetGrid);
 				isMoving = true;
 			}
 			
-			move(0, -speedY);
+			switch(direction) {
+				case 0:
+					move(0, -speedX);
+					break;
+				case 1:
+					move (speedX, 0);
+					break;
+				case 2:
+					move(0, speedX);
+					break;
+				case 3:
+					move (-speedX, 0);
+					break;
+				default:
+					break;
+			}
 			
-			if (Math.abs(getY() - targetCoordinateY) < speedY) {
-				setY(targetCoordinateY);
-				isMoving = false;
-				this.stop();
+			if (direction == 0 || direction == 2) {
+				if (Math.abs(getY() - targetCoordinate) < speedX) {
+					setImage(imgW1);
+					setY(targetCoordinate);
+					isMoving = false;
+					this.stop();
+				}
+			} else {
+				if (Math.abs(getX() - targetCoordinate) < speedX) {
+					setImage(imgW1);
+					setX(targetCoordinate);
+					isMoving = false;
+					this.stop();
+				}
 			}
 		}
 	};
-	
-	AnimationTimer moveLeft = new AnimationTimer() {
-		int targetGridX;
-		double targetCoordinateX;
-		
-		@Override
-		public void handle(long now) {
-			
-			setRotate(270);
-			if (!isMoving) {
-				targetGridX = getGridX() - 1;
-				targetCoordinateX = getCoordinateOfGridX(targetGridX);
-				isMoving = true;
-			}
-			
-			move(-speedX, 0);
-			
-			if (Math.abs(getX() - targetCoordinateX) < speedX) {
-				setX(targetCoordinateX);
-				isMoving = false;
-				this.stop();
-			}
-		}
-	};
-	
-	AnimationTimer moveDown = new AnimationTimer() {
-		int targetGridY;
-		double targetCoordinateY;
-		
-		@Override
-		public void handle(long now) {
-			
-			setRotate(0);
-			if (!isMoving) {
-				targetGridY = getGridY() + 1;
-				targetCoordinateY = getCoordinateOfGridY(targetGridY);
-				isMoving = true;
-			}
-			
-			move(0, speedY);
-			
-			if (Math.abs(getY() - targetCoordinateY) < speedY) {
-				setY(targetCoordinateY);
-				isMoving = false;
-				this.stop();
-			}
-		}
-	};
-	
-	AnimationTimer moveRight = new AnimationTimer() {
-		int targetGridX;
-		double targetCoordinateX;
-		
-		@Override
-		public void handle(long now) {
-			
-			setRotate(90);
-			if (!isMoving) {
-				targetGridX = getGridX() + 1;
-				targetCoordinateX = getCoordinateOfGridX(targetGridX);
-				isMoving = true;
-			}
-			
-			move(speedX, 0);
-			
-			if (Math.abs(getX() - targetCoordinateX) < speedX) {
-				setX(targetCoordinateX);
-				isMoving = false;
-				this.stop();
-			}
-		}
-	};
-	
-	public void transitionGrid(int dir) {
-		if (isMoving) {
-			return;
-		}
-		if (dir == 0) {
-			moveUp.start();
-		} else if (dir == 1) {
-    		moveLeft.start();
-    	} else if (dir == 2 ) {
-    		moveDown.start();
-    	} else if (dir == 3) {
-    		moveRight.start();
-    	}
-    }
 	
 	@Override
 	public void act(long now) {
@@ -307,5 +251,14 @@ public class Frog extends Actor {
 		}
 		return false;
 		
+	}
+	
+	public int getDirection() {
+		return direction;
+	}
+	
+	public void setDirection(int dir) {
+		direction = dir;
+		setRotate(dir * 90);
 	}
 }
