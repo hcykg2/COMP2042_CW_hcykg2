@@ -4,6 +4,8 @@ import java.io.File;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import model.Row;
+import model.Vehicle;
 
 public class MyStage extends World{
 	MediaPlayer mediaPlayer;
@@ -25,6 +27,9 @@ public class MyStage extends World{
 //			
 //		});
 //		mediaPlayer.play();
+		add(new Vehicle("file:src/assets/car1.png", 2, 10, -1, 1));
+		add(new Row("file:src/assets/grassRow.png", 13));
+		add(new Row("file:src/assets/roadRow.png", 12));
 	}
 	
 	public void playMusic() {

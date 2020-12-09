@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.image.Image;
+import model.Actor;
 
 public class BackgroundImage extends Actor{
 

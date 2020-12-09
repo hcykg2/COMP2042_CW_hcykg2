@@ -1,7 +1,9 @@
-package view;
+package model;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
+import view.World;
+
 import java.util.ArrayList;
 
 
@@ -13,19 +15,23 @@ public abstract class Actor extends ImageView{
     }
     
     public int getGridX() {
-    	return (int) (getX() + World.gridSize/2 - World.gridOffsetX)/World.gridSize;
+    	return (int) (getX() + World.getGridSize()/2)/World.getGridSize();
     }
     
     public int getGridY() {
-    	return (int) (getY() - World.gridOffsetX)/World.gridSize;
+    	return (int) (getY())/World.getGridSize();
     }
     
-    public void setGridX(int coordinate) {
-    	setX(coordinate * World.gridSize + World.gridOffsetX);
+    public void setGridX(int x) {
+    	setX(x * World.getGridSize());
+    }
+    
+    public void setGridY(int y) {
+    	setY(y * World.getGridSize());
     }
     
     public double getCoordinateOfGrid(int coordinate) {
-    	return coordinate * World.gridSize + World.gridOffsetX;
+    	return coordinate * World.getGridSize();
     }
 
     public World getWorld() {

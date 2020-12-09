@@ -1,4 +1,4 @@
-package model;
+package app;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -6,14 +6,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import model.Digit;
+import model.Frog;
+import model.Log;
+import model.Turtle;
+import model.WetTurtle;
 import view.BackgroundImage;
-import view.Digit;
 import view.End;
-import view.Frog;
-import view.Log;
 import view.MyStage;
-import view.Turtle;
-import view.WetTurtle;
+import view.World;
 
 public class Main extends Application {
 	AnimationTimer timer;
@@ -26,9 +27,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {	
 	    background = new MyStage();
-	    Scene scene  = new Scene(background,896,896);
+	    Scene scene  = new Scene(background, World.getGridSize() * World.getGridCountX(), World.getGridSize() * World.getGridCountY());
 	    
-	    animal = new Frog("file:src/assets/frogUp.png");
+	    animal = new Frog();
 
 		BackgroundImage froggerback = new BackgroundImage("file:src/assets/Screen Shot 2017-05-29 at 10.02.14 PM.png");
 	    

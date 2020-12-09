@@ -1,13 +1,13 @@
-package view;
+package model;
 
 import java.util.ArrayList;
-
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
-
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import view.End;
+import view.World;
 
 
 public class Frog extends Actor {
@@ -18,45 +18,44 @@ public class Frog extends Actor {
 	boolean noMove = false;
 	
 	
-	static double speedX = 3;
+	static double speed = 5;
 	boolean isMoving = false;
 	private int direction = 0;
 	
 	double movement = 13.3333333*2;
-	int imgSize = World.gridSize;
+	int imgSize = World.getGridSize();
 	boolean carDeath = false;
 	boolean waterDeath = false;
 	boolean stop = false;
 	boolean changeScore = false;
 	int carD = 0;
 	double w = 800;
-	double speed = 2;
 	ArrayList<End> inter = new ArrayList<End>();
 	
-	public Frog(String imageLink) {
-		setImage(new Image(imageLink, imgSize, imgSize, true, true));
-		setX(0);
-		setY(832);
-		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
-		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
+	public Frog() {
+		imgW1 = new Image("file:src/assets/frogUp.png", imgSize - 1, imgSize - 1, true, true);
+		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize - 1, imgSize - 1, true, true);
+		setImage(imgW1);
+		setGridX(6);
+		setGridY(13);
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
 				if (!isMoving) {
 					if (event.getCode() == KeyCode.W) {	            	
 		                setDirection(0);
-		                moveUp.start();
+		                moveGrid.start();
 		            }
 		            else if (event.getCode() == KeyCode.A) {
 		            	setDirection(3);
-		                moveUp.start();
+		                moveGrid.start();
 		            }
 		            else if (event.getCode() == KeyCode.S) {	            	
 		            	setDirection(2);
-		                moveUp.start();
+		                moveGrid.start();
 		            }
 		            else if (event.getCode() == KeyCode.D) {
 		            	setDirection(1);
-		                moveUp.start();
+		                moveGrid.start();
 		            }
 				}
 			}
@@ -65,9 +64,10 @@ public class Frog extends Actor {
 	
 	// GRID MOVEMENT
 	
-	AnimationTimer moveUp = new AnimationTimer() {
+	AnimationTimer moveGrid = new AnimationTimer() {
 		int targetGrid;
 		double targetCoordinate;
+		int moved;
 		
 		@Override
 		public void handle(long now) {
@@ -84,39 +84,46 @@ public class Frog extends Actor {
 					targetGrid = getGridX() - 1;
 				}
 				targetCoordinate = getCoordinateOfGrid(targetGrid);
+				moved = 0;
 				isMoving = true;
 			}
 			
 			switch(direction) {
 				case 0:
-					move(0, -speedX);
+					move(0, -speed);
 					break;
 				case 1:
-					move (speedX, 0);
+					move (speed, 0);
 					break;
 				case 2:
-					move(0, speedX);
+					move(0, speed);
 					break;
 				case 3:
-					move (-speedX, 0);
+					move (-speed, 0);
 					break;
 				default:
 					break;
 			}
+			moved += speed;
+			
+			if (moved > 2 * World.getGridSize()) {
+				isMoving = false;
+				stop();
+			}
 			
 			if (direction == 0 || direction == 2) {
-				if (Math.abs(getY() - targetCoordinate) < speedX) {
+				if (Math.abs(getY() - targetCoordinate) < speed) {
 					setImage(imgW1);
 					setY(targetCoordinate);
 					isMoving = false;
-					this.stop();
+					stop();
 				}
 			} else {
-				if (Math.abs(getX() - targetCoordinate) < speedX) {
+				if (Math.abs(getX() - targetCoordinate) < speed) {
 					setImage(imgW1);
 					setX(targetCoordinate);
 					isMoving = false;
-					this.stop();
+					stop();
 				}
 			}
 		}
@@ -124,17 +131,6 @@ public class Frog extends Actor {
 	
 	@Override
 	public void act(long now) {
-//		int bounds = 0;
-//		if (getY()<0 || getY()>734) {
-//			setX(300);
-//			setY(679.8+movement);
-//		}
-//		if (getX()<0) {
-//			move(movement*2, 0);
-//		}
-//		if (getX()>600) {
-//		move(-movement*2, 0);
-//	}
 		if (carDeath) {
 			noMove = true;
 			if ((now)% 11 ==0) {
@@ -155,7 +151,6 @@ public class Frog extends Actor {
 				carDeath = false;
 				carD = 0;
 				setImage(new Image("file:src/assets/froggerUp.png", imgSize, imgSize, true, true));
-				noMove = false;
 				if (points>50) {
 					points-=50;
 					changeScore = true;
@@ -194,7 +189,7 @@ public class Frog extends Actor {
 			}
 			
 		}
-		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+		if (getIntersectingObjects(Vehicle.class).size() >= 1) {
 			carDeath = true;
 		}
 		if (getX() == 240 && getY() == 82) {

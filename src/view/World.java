@@ -12,12 +12,14 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import model.Actor;
+import model.Row;
 
 public abstract class World extends Pane {
     private AnimationTimer timer;
-    static int gridSize = 64;
-	static int gridOffsetX = 0;
-	static int gridOffsetY = 0;
+    private final static int gridSize = 64;
+    private final static int gridCountX = 14;
+    private final static int gridCountY = 14;
     
     public World() {
     	
@@ -91,6 +93,10 @@ public abstract class World extends Pane {
     public void add(Actor actor) {
         getChildren().add(actor);
     }
+    
+    public void add(Row row) {
+        getChildren().add(row);
+    }
 
     public void remove(Actor actor) {
         getChildren().remove(actor);
@@ -107,4 +113,16 @@ public abstract class World extends Pane {
     }
 
     public abstract void act(long now);
+    
+    public static int getGridSize() {
+    	return gridSize;
+    }
+    
+    public static int getGridCountX() {
+    	return gridCountX;
+    }
+    
+    public static int getGridCountY() {
+    	return gridCountY;
+    }
 }
