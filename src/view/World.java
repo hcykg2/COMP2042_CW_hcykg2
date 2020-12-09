@@ -11,14 +11,13 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import p4_group_8_repo.Actor;
-
 
 public abstract class World extends Pane {
     private AnimationTimer timer;
+    static int gridSize = 64;
+	static int gridOffsetX = 0;
+	static int gridOffsetY = 0;
     
     public World() {
     	

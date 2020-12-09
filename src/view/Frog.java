@@ -1,148 +1,196 @@
-package p4_group_8_repo;
+package view;
 
 import java.util.ArrayList;
 
+import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import view.End;
-import view.WetTurtle;
 
 
-public class Animal extends Actor {
+public class Frog extends Actor {
 	Image imgW1;
-	Image imgA1;
-	Image imgS1;
-	Image imgD1;
 	Image imgW2;
-	Image imgA2;
-	Image imgS2;
-	Image imgD2;
 	int points = 0;
 	int end = 0;
 	private boolean second = false;
 	boolean noMove = false;
+	
+	
+	static double speedX = 3;
+	static double speedY = 3;
+	boolean isMoving = false;
+	
 	double movement = 13.3333333*2;
 	double movementX = 10.666666*2;
-	int imgSize = 40;
+	int imgSize = World.gridSize;
 	boolean carDeath = false;
 	boolean waterDeath = false;
 	boolean stop = false;
 	boolean changeScore = false;
 	int carD = 0;
 	double w = 800;
+	double speed = 2;
 	ArrayList<End> inter = new ArrayList<End>();
-	public Animal(String imageLink) {
+	
+	public Frog(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
-		setX(300);
-		setY(679.8+movement);
-		imgW1 = new Image("file:src/assets/froggerUp.png", imgSize, imgSize, true, true);
-		imgA1 = new Image("file:src/assets/froggerLeft.png", imgSize, imgSize, true, true);
-		imgS1 = new Image("file:src/assets/froggerDown.png", imgSize, imgSize, true, true);
-		imgD1 = new Image("file:src/assets/froggerRight.png", imgSize, imgSize, true, true);
+		setX(0);
+		setY(896);
+		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
 		imgW2 = new Image("file:src/assets/froggerUpJump.png", imgSize, imgSize, true, true);
-		imgA2 = new Image("file:src/assets/froggerLeftJump.png", imgSize, imgSize, true, true);
-		imgS2 = new Image("file:src/assets/froggerDownJump.png", imgSize, imgSize, true, true);
-		imgD2 = new Image("file:src/assets/froggerRightJump.png", imgSize, imgSize, true, true);
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
 				if (noMove) {
 					
 				}
 				else {
-				if (second) {
-					if (event.getCode() == KeyCode.W) {	  
-		                move(0, -movement);
-		                changeScore = false;
-		                setImage(imgW1);
-		                second = false;
-		            }
-		            else if (event.getCode() == KeyCode.A) {	            	
-		            	 move(-movementX, 0);
-		            	 setImage(imgA1);
-		            	 second = false;
-		            }
-		            else if (event.getCode() == KeyCode.S) {	            	
-		            	 move(0, movement);
-		            	 setImage(imgS1);
-		            	 second = false;
-		            }
-		            else if (event.getCode() == KeyCode.D) {	            	
-		            	 move(movementX, 0);
-		            	 setImage(imgD1);
-		            	 second = false;
-		            }
-				}
-				else if (event.getCode() == KeyCode.W) {	            	
-	                move(0, -movement);
-	                setImage(imgW2);
-	                second = true;
+					
+				if (event.getCode() == KeyCode.W) {	            	
+	                transitionGrid(0);
 	            }
-	            else if (event.getCode() == KeyCode.A) {	            	
-	            	 move(-movementX, 0);
-	            	 setImage(imgA2);
-	            	 second = true;
+	            else if (event.getCode() == KeyCode.A) {
+	            	transitionGrid(1);
 	            }
 	            else if (event.getCode() == KeyCode.S) {	            	
-	            	 move(0, movement);
-	            	 setImage(imgS2);
-	            	 second = true;
+	            	 transitionGrid(2);
 	            }
-	            else if (event.getCode() == KeyCode.D) {	            	
-	            	 move(movementX, 0);
-	            	 setImage(imgD2);
-	            	 second = true;
+	            else if (event.getCode() == KeyCode.D) {
+	            	 transitionGrid(3);
 	            }
 	        }
 			}
 		});	
-		setOnKeyReleased(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event) {
-				if (noMove) {}
-				else {
-				if (event.getCode() == KeyCode.W) {	  
-					if (getY() < w) {
-						changeScore = true;
-						w = getY();
-						points+=10;
-					}
-	                move(0, -movement);
-	                setImage(imgW1);
-	                second = false;
-	            }
-	            else if (event.getCode() == KeyCode.A) {	            	
-	            	 move(-movementX, 0);
-	            	 setImage(imgA1);
-	            	 second = false;
-	            }
-	            else if (event.getCode() == KeyCode.S) {	            	
-	            	 move(0, movement);
-	            	 setImage(imgS1);
-	            	 second = false;
-	            }
-	            else if (event.getCode() == KeyCode.D) {	            	
-	            	 move(movementX, 0);
-	            	 setImage(imgD1);
-	            	 second = false;
-	            }
-	        }
+	}
+	
+	// GRID MOVEMENT
+	
+	AnimationTimer moveUp = new AnimationTimer() {
+		int targetGridY;
+		double targetCoordinateY;
+		
+		@Override
+		public void handle(long now) {
+			
+			setRotate(0);
+			if (!isMoving) {
+				targetGridY = getGridY() - 1;
+				targetCoordinateY = getCoordinateOfGridY(targetGridY);
+				isMoving = true;
 			}
 			
-		});
-	}
+			move(0, -speedY);
+			
+			if (Math.abs(getY() - targetCoordinateY) < speedY) {
+				setY(targetCoordinateY);
+				isMoving = false;
+				this.stop();
+			}
+		}
+	};
+	
+	AnimationTimer moveLeft = new AnimationTimer() {
+		int targetGridX;
+		double targetCoordinateX;
+		
+		@Override
+		public void handle(long now) {
+			
+			setRotate(270);
+			if (!isMoving) {
+				targetGridX = getGridX() - 1;
+				targetCoordinateX = getCoordinateOfGridX(targetGridX);
+				isMoving = true;
+			}
+			
+			move(-speedX, 0);
+			
+			if (Math.abs(getX() - targetCoordinateX) < speedX) {
+				setX(targetCoordinateX);
+				isMoving = false;
+				this.stop();
+			}
+		}
+	};
+	
+	AnimationTimer moveDown = new AnimationTimer() {
+		int targetGridY;
+		double targetCoordinateY;
+		
+		@Override
+		public void handle(long now) {
+			
+			setRotate(0);
+			if (!isMoving) {
+				targetGridY = getGridY() + 1;
+				targetCoordinateY = getCoordinateOfGridY(targetGridY);
+				isMoving = true;
+			}
+			
+			move(0, speedY);
+			
+			if (Math.abs(getY() - targetCoordinateY) < speedY) {
+				setY(targetCoordinateY);
+				isMoving = false;
+				this.stop();
+			}
+		}
+	};
+	
+	AnimationTimer moveRight = new AnimationTimer() {
+		int targetGridX;
+		double targetCoordinateX;
+		
+		@Override
+		public void handle(long now) {
+			
+			setRotate(90);
+			if (!isMoving) {
+				targetGridX = getGridX() + 1;
+				targetCoordinateX = getCoordinateOfGridX(targetGridX);
+				isMoving = true;
+			}
+			
+			move(speedX, 0);
+			
+			if (Math.abs(getX() - targetCoordinateX) < speedX) {
+				setX(targetCoordinateX);
+				isMoving = false;
+				this.stop();
+			}
+		}
+	};
+	
+	public void transitionGrid(int dir) {
+		if (isMoving) {
+			return;
+		}
+		if (dir == 0) {
+			moveUp.start();
+		} else if (dir == 1) {
+    		moveLeft.start();
+    	} else if (dir == 2 ) {
+    		moveDown.start();
+    	} else if (dir == 3) {
+    		moveRight.start();
+    	}
+    }
 	
 	@Override
 	public void act(long now) {
-		int bounds = 0;
-		if (getY()<0 || getY()>734) {
-			setX(300);
-			setY(679.8+movement);
-		}
-		if (getX()<0) {
-			move(movement*2, 0);
-		}
+//		int bounds = 0;
+//		if (getY()<0 || getY()>734) {
+//			setX(300);
+//			setY(679.8+movement);
+//		}
+//		if (getX()<0) {
+//			move(movement*2, 0);
+//		}
+//		if (getX()>600) {
+//		move(-movement*2, 0);
+//	}
 		if (carDeath) {
 			noMove = true;
 			if ((now)% 11 ==0) {
@@ -202,10 +250,6 @@ public class Animal extends Actor {
 			}
 			
 		}
-		
-		if (getX()>600) {
-			move(-movement*2, 0);
-		}
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
 			carDeath = true;
 		}
@@ -264,6 +308,4 @@ public class Animal extends Actor {
 		return false;
 		
 	}
-	
-
 }

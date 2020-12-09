@@ -1,7 +1,6 @@
 package view;
 
 import javafx.scene.image.Image;
-import p4_group_8_repo.Actor;
 
 public class WetTurtle extends Actor{
 	Image turtle1;

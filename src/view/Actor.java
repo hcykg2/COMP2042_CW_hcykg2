@@ -1,9 +1,7 @@
-package p4_group_8_repo;
+package view;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
-import view.World;
-
 import java.util.ArrayList;
 
 
@@ -12,6 +10,26 @@ public abstract class Actor extends ImageView{
     public void move(double dx, double dy) {
         setX(getX() + dx);
         setY(getY() + dy);
+    }
+    
+    public int getGridX() {
+    	return (int) (getX() - World.gridOffsetX)/World.gridSize;
+    }
+    
+    public int getGridY() {
+    	return (int) (getY() - World.gridOffsetX)/World.gridSize;
+    }
+    
+    public void setGridX(int x) {
+    	setX(x * World.gridSize + World.gridOffsetX);
+    }
+    
+    public double getCoordinateOfGridX(int x) {
+    	return x * World.gridSize + World.gridOffsetX;
+    }
+    
+    public double getCoordinateOfGridY(int y) {
+    	return y * World.gridSize + World.gridOffsetX;
     }
 
     public World getWorld() {
