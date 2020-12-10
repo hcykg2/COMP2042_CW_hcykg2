@@ -11,13 +11,14 @@ public class End extends Actor{
 	}
 	
 	public End(int x, int y) {
-		setX(x);
-		setY(y);
-		setImage(new Image("file:src/assets/End.png", 60, 60, true, true));
+		super(2 * World.getGridSize(), 2 * World.getGridSize());
+		setGridX(x);
+		setGridY(y);
+		setImage(new Image("file:src/assets/end.png", 2 * World.getGridSize(), 2 * World.getGridSize(), true, true));
 	}
 	
 	public void setEnd() {
-		setImage(new Image("file:src/assets/FrogEnd.png", 70, 70, true, true));
+		setImage(new Image("file:src/assets/end_frog.png", 2 * World.getGridSize(), 2 * World.getGridSize(), true, true));
 		activated = true;
 	}
 	

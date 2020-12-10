@@ -1,6 +1,7 @@
 package model;
 
 import javafx.scene.image.Image;
+import view.World;
 
 public class Log extends Actor {
 
@@ -15,6 +16,7 @@ public class Log extends Actor {
 	}
 	
 	public Log(String imageLink, int size, int xpos, int ypos, double s) {
+		super(World.getGridSize(), World.getGridSize());
 		setImage(new Image(imageLink, size,size, true, true));
 		setX(xpos);
 		setY(ypos);

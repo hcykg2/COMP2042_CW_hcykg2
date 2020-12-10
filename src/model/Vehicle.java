@@ -17,7 +17,8 @@ public class Vehicle extends Actor {
 	}
 	
 	public Vehicle(String imageLink, int x, int y, int speed, int width) {
-		setImage(new Image(imageLink, width * World.getGridSize() - 1,  World.getGridSize() - 1, true, true));
+		super(World.getGridSize(), World.getGridSize());
+		setImage(new Image(imageLink, width * World.getGridSize(),  World.getGridSize(), true, true));
 		setGridX(x);
 		setGridY(y);
 		speedMultiplier = speed;

@@ -33,10 +33,11 @@ public class Frog extends Actor {
 	ArrayList<End> inter = new ArrayList<End>();
 	
 	public Frog() {
-		imgW1 = new Image("file:src/assets/frogUp.png", imgSize - 1, imgSize - 1, true, true);
-		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize - 1, imgSize - 1, true, true);
+		super(World.getGridSize(), World.getGridSize());
+		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
+		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
 		setImage(imgW1);
-		setGridX(6);
+		setGridX(0);
 		setGridY(13);
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
@@ -86,9 +87,8 @@ public class Frog extends Actor {
 				targetCoordinate = getCoordinateOfGrid(targetGrid);
 				moved = 0;
 				isMoving = true;
-			}
-			
-			switch(direction) {
+			} else {
+				switch(direction) {
 				case 0:
 					move(0, -speed);
 					break;
@@ -103,8 +103,9 @@ public class Frog extends Actor {
 					break;
 				default:
 					break;
+				}
+				moved += speed;
 			}
-			moved += speed;
 			
 			if (moved > 2 * World.getGridSize()) {
 				isMoving = false;

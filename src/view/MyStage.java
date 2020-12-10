@@ -30,6 +30,9 @@ public class MyStage extends World{
 		add(new Vehicle("file:src/assets/car1.png", 2, 10, -1, 1));
 		add(new Row("file:src/assets/grassRow.png", 13));
 		add(new Row("file:src/assets/roadRow.png", 12));
+		add(new Row("file:src/assets/waterRow.png", 0));
+		add(new Row("file:src/assets/end_row_1.png", 1));
+		add(new Row("file:src/assets/end_row_2.png", 2));
 	}
 	
 	public void playMusic() {
