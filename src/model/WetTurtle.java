@@ -1,7 +1,6 @@
 package model;
 
 import javafx.scene.image.Image;
-import view.World;
 
 public class WetTurtle extends Actor{
 	Image turtle1;
@@ -39,7 +38,6 @@ public class WetTurtle extends Actor{
 			setX(600);
 	}
 	public WetTurtle(int xpos, int ypos, int s, int w, int h) {
-		super(World.getGridSize(), World.getGridSize());
 		turtle1 = new Image("file:src/assets/TurtleAnimation1.png", w, h, true, true);
 		turtle2 = new Image("file:src/assets/TurtleAnimation2Wet.png", w, h, true, true);
 		turtle3 = new Image("file:src/assets/TurtleAnimation3Wet.png", w, h, true, true);

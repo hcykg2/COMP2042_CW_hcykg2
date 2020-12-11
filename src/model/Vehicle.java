@@ -1,7 +1,6 @@
 package model;
 
 import javafx.scene.image.Image;
-import view.World;
 
 public class Vehicle extends Actor {
 	private int speed = 1;
@@ -17,7 +16,6 @@ public class Vehicle extends Actor {
 	}
 	
 	public Vehicle(String imageLink, int x, int y, int speed, int width) {
-		super(World.getGridSize(), World.getGridSize());
 		setImage(new Image(imageLink, width * World.getGridSize(),  World.getGridSize(), true, true));
 		setGridX(x);
 		setGridY(y);

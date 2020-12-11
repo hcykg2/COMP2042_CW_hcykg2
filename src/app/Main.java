@@ -7,13 +7,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Digit;
+import model.End;
 import model.Frog;
 import model.Log;
+import model.MyStage;
 import model.Turtle;
 import model.WetTurtle;
-import view.End;
-import view.MyStage;
-import view.World;
+import model.World;
 
 public class Main extends Application {
 	AnimationTimer timer;

@@ -1,11 +1,7 @@
 package model;
 
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
-import view.World;
 
 import java.util.ArrayList;
 
@@ -14,11 +10,6 @@ public abstract class Actor extends ImageView{
 	
 	private double width;
 	private double height;
-	
-	public Actor(double x, double y) {
-		width = x;
-		height = y;
-	}
 
     public void move(double dx, double dy) {
         setX(getX() + dx);
@@ -57,14 +48,14 @@ public abstract class Actor extends ImageView{
         return this.getBoundsInLocal().getHeight();
     }
 
-    public <A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls){
-        ArrayList<A> someArray = new ArrayList<A>();
+    public <A extends Actor> java.util.List<A> getCollidedActors(java.lang.Class<A> cls){
+        ArrayList<A> collidedActors = new ArrayList<A>();
         for (A actor: getWorld().getObjects(cls)) {
             if (actor != this && actor.intersects(getX() + 1, getY() + 1, width - 2, height - 2)) {
-                someArray.add(actor);
+                collidedActors.add(actor);
             }
         }
-        return someArray;
+        return collidedActors;
     }
     
     public void manageInput(InputEvent e) {

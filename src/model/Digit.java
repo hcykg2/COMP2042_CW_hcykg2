@@ -1,7 +1,6 @@
 package model;
 
 import javafx.scene.image.Image;
-import view.World;
 
 public class Digit extends Actor{
 	int dim;
@@ -13,7 +12,6 @@ public class Digit extends Actor{
 	}
 	
 	public Digit(int n, int dim, int x, int y) {
-		super(World.getGridSize(), World.getGridSize());
 		im1 = new Image("file:src/assets/"+n+".png", dim, dim, true, true);
 		setImage(im1);
 		setX(x);

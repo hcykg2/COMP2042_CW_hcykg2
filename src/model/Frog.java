@@ -1,13 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+
+import controller.CollisionController;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import view.End;
-import view.World;
 
 
 public class Frog extends Actor {
@@ -20,6 +20,7 @@ public class Frog extends Actor {
 	
 	static double speed = 5;
 	boolean isMoving = false;
+	boolean isDying = false;
 	private int direction = 0;
 	
 	double movement = 13.3333333*2;
@@ -33,7 +34,6 @@ public class Frog extends Actor {
 	ArrayList<End> inter = new ArrayList<End>();
 	
 	public Frog() {
-		super(World.getGridSize(), World.getGridSize());
 		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
 		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
 		setImage(imgW1);
@@ -132,105 +132,10 @@ public class Frog extends Actor {
 	
 	@Override
 	public void act(long now) {
-		if (carDeath) {
-			noMove = true;
-			if ((now)% 11 ==0) {
-				carD++;
-			}
-			if (carD==1) {
-				setImage(new Image("file:src/assets/cardeath1.png", imgSize, imgSize, true, true));
-			}
-			if (carD==2) {
-				setImage(new Image("file:src/assets/cardeath2.png", imgSize, imgSize, true, true));
-			}
-			if (carD==3) {
-				setImage(new Image("file:src/assets/cardeath3.png", imgSize, imgSize, true, true));
-			}
-			if (carD == 4) {
-				setX(300);
-				setY(679.8+movement);
-				carDeath = false;
-				carD = 0;
-				setImage(new Image("file:src/assets/froggerUp.png", imgSize, imgSize, true, true));
-				if (points>50) {
-					points-=50;
-					changeScore = true;
-				}
-			}
-			
-		}
-		if (waterDeath) {
-			noMove = true;
-			if ((now)% 11 ==0) {
-				carD++;
-			}
-			if (carD==1) {
-				setImage(new Image("file:src/assets/waterdeath1.png", imgSize,imgSize , true, true));
-			}
-			if (carD==2) {
-				setImage(new Image("file:src/assets/waterdeath2.png", imgSize,imgSize , true, true));
-			}
-			if (carD==3) {
-				setImage(new Image("file:src/assets/waterdeath3.png", imgSize,imgSize , true, true));
-			}
-			if (carD == 4) {
-				setImage(new Image("file:src/assets/waterdeath4.png", imgSize,imgSize , true, true));
-			}
-			if (carD == 5) {
-				setX(300);
-				setY(679.8+movement);
-				waterDeath = false;
-				carD = 0;
-				setImage(new Image("file:src/assets/froggerUp.png", imgSize, imgSize, true, true));
-				noMove = false;
-				if (points>50) {
-					points-=50;
-					changeScore = true;
-				}
-			}
-			
-		}
-		if (getIntersectingObjects(Vehicle.class).size() >= 1) {
-			carDeath = true;
-		}
-		if (getX() == 240 && getY() == 82) {
-			stop = true;
-		}
-		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-			if(getIntersectingObjects(Log.class).get(0).getLeft())
-				move(-2,0);
-			else
-				move (.75,0);
-		}
-		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-			move(-1,0);
-		}
-		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
-				waterDeath = true;
-			} else {
-				move(-1,0);
-			}
-		}
-		else if (getIntersectingObjects(End.class).size() >= 1) {
-			inter = (ArrayList<End>) getIntersectingObjects(End.class);
-			if (getIntersectingObjects(End.class).get(0).isActivated()) {
-				end--;
-				points-=50;
-			}
-			points+=50;
-			changeScore = true;
-			w=800;
-			getIntersectingObjects(End.class).get(0).setEnd();
-			end++;
-			setX(300);
-			setY(679.8+movement);
-		}
-		else if (getY()<413){
-			waterDeath = true;
-			//setX(300);
-			//setY(679.8+movement);
-		}
+//		if (CollisionController.getCollidedActors(getWorld(), this, Vehicle.class).size() > 0) {
+//			System.out.println("wow");
+//		}
+//		System.out.println(getWorld().getHeight());
 	}
 	public boolean getStop() {
 		return end==5;

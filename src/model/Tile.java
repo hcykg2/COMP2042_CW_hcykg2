@@ -2,13 +2,14 @@ package model;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import view.World;
 
-public class Row extends ImageView {
+public class Tile extends ImageView {
+	boolean isSafe;
 	
-	public Row(String imageLink, int y) {
-		setImage(new Image(imageLink, 224 * World.getGridSize(), World.getGridSize(), true, true));
-		setX(0);
+	public Tile(String imageLink,int x, int y, boolean isSafe) {
+		setImage(new Image(imageLink, World.getGridSize(), World.getGridSize(), true, true));
+		setX(x * World.getGridSize());
 		setY(y * World.getGridSize());
+		this.isSafe = isSafe;
 	}
 }

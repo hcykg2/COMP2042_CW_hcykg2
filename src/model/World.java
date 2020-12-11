@@ -1,4 +1,4 @@
-package view;
+package model;
 
 
 import java.util.ArrayList;
@@ -12,8 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import model.Actor;
-import model.Row;
 
 public abstract class World extends Pane {
     private AnimationTimer timer;
@@ -94,8 +92,14 @@ public abstract class World extends Pane {
         getChildren().add(actor);
     }
     
-    public void add(Row row) {
-        getChildren().add(row);
+    public void add(Tile tile) {
+        getChildren().add(tile);
+    }
+    
+    public void addRow(String imageLink, int y, boolean isSafe) {
+        for (int i = 0; i < World.getGridCountX(); i++) {
+        	add(new Tile(imageLink, i, y, isSafe));
+        }
     }
 
     public void remove(Actor actor) {
