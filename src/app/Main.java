@@ -25,9 +25,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {	
 	    background = new MyStage();
 	    Scene scene  = new Scene(background, World.getGridSize() * World.getGridCountX(), World.getGridSize() * World.getGridCountY());
-	    
-	    animal = new Frog();
-		background.add(animal);
 
 		background.start();
 		primaryStage.setScene(scene);
@@ -39,20 +36,7 @@ public class Main extends Application {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-            	if (animal.changeScore()) {
-            		setNumber(animal.getPoints());
-            	}
-            	if (animal.getStop()) {
-            		System.out.print("STOPP:");
-//            		background.stopMusic();
-            		stop();
-            		background.stop();
-            		Alert alert = new Alert(AlertType.INFORMATION);
-            		alert.setTitle("You Have Won The Game!");
-            		alert.setHeaderText("Your High Score: "+animal.getPoints()+"!");
-            		alert.setContentText("Highest Possible Score: 800");
-            		alert.show();
-            	}
+
             }
         };
     }

@@ -112,6 +112,12 @@ public abstract class World extends Pane {
     		add(new Turtle(x + i, y, s));
     	}
     }
+    
+    public void addLog(int x, int y, int s, int length) {
+    	for (int i = 0; i < length; i++) {
+    		add(new Turtle(x + i, y, s));
+    	}
+    }
 
     public <A extends Actor> List<A> getObjects(Class<A> cls) {
         ArrayList<A> someArray = new ArrayList<A>();

@@ -45,6 +45,7 @@ public class MyStage extends World{
 //		add(new Turtle(2, 3, -1));
 		
 		add(new End(6, 1));
+		add(new Frog());
 	}
 	
 	public void playMusic() {
