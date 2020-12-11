@@ -12,11 +12,7 @@ public abstract class Actor extends ImageView {
     }
     
     public int getGridX() {
-    	return (int) (getX())/World.getGridSize();
-    }
-    
-    public int getGridX(double offset) {
-    	return (int) (getX() + offset)/World.getGridSize();
+    	return (int) Math.floor((getX() + World.getGridSize()/2)/World.getGridSize());
     }
     
     public int getGridY() {
