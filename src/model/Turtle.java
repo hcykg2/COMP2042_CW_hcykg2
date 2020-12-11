@@ -1,5 +1,6 @@
 package model;
 
+import controller.BoundsController;
 import javafx.scene.image.Image;
 
 public class Turtle extends Actor {
@@ -12,12 +13,12 @@ public class Turtle extends Actor {
 	@Override
 	public void act(long now) {		
 		move(speed , 0);
-		if (getX() > 600 && speed>0) {
-			setX(-200);
+		if (BoundsController.isFullyOutOfBounds(this) && speed>0) {
+			setGridX(BoundsController.minGridX - 1);
 			System.out.println(getX());
 		}
-		if (getX() < -75 && speed<0) {
-			setX(600);
+		if (BoundsController.isFullyOutOfBounds(this) && speed<0) {
+			setGridX(BoundsController.maxGridX + 1);
 		}
 	}
 	public Turtle(int x, int y, int s) {
