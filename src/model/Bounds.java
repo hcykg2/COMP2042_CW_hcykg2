@@ -1,9 +1,8 @@
-package controller;
+package model;
 
-import model.Actor;
-import model.World;
+import model.actor.Actor;
 
-public class BoundsController {
+public class Bounds {
 	public static final int minGridX = 0;
 	public static final int minGridY = 0;
 	public static final int maxGridX = World.getGridCountX() - 1;
@@ -26,6 +25,21 @@ public class BoundsController {
 			return true;
 		} else {
 			return false;
+		}
+	}
+	
+	public static boolean canMoveInDirection(Actor actor, int dir) {
+		switch (dir) {
+			case 0:
+				return actor.getGridY() > minGridY;
+			case 1:
+				return actor.getGridX() < maxGridX;
+			case 2:
+				return actor.getGridY() < maxGridY;
+			case 3:
+				return actor.getGridX() > minGridX;
+			default:
+				return false;
 		}
 	}
 }

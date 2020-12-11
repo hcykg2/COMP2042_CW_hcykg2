@@ -2,8 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
-import model.Actor;
 import model.World;
+import model.actor.Actor;
 
 public class CollisionController<A> {
 	

@@ -1,28 +1,30 @@
 package view;
 
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Screen;
+import model.World;
 
 public class ViewManager {
-	
-	private static final int HEIGHT = 800;
-	private static final int WIDTH = 600;
-	private AnchorPane primaryPane;
-	private Scene primaryScene;
-	private Stage primaryStage;
+
+	private Screen screen;
+	private Scene scene;
+	private Stage stage;
 	
 	public ViewManager() {
-		primaryPane = new AnchorPane();
-		primaryScene = new Scene(primaryPane, WIDTH, HEIGHT);
-		primaryStage = new Stage();
-		
-		primaryStage.setScene(primaryScene);
-		primaryStage.show();
+		screen = new Screen();
+		scene  = new Scene(screen, World.getGridSize() * World.getGridCountX(), World.getGridSize() * World.getGridCountY());
+		stage = new Stage();
+		screen.start();
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	public Stage getPrimaryStage() {
-		return primaryStage;
+		return stage;
+	}
+	
+	public Screen getScreen() {
+		return screen;
 	}
 }

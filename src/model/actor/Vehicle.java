@@ -1,6 +1,7 @@
-package model;
+package model.actor;
 
 import javafx.scene.image.Image;
+import model.World;
 
 public class Vehicle extends Actor {
 	private int speed = 1;

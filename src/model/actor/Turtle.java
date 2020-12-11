@@ -1,10 +1,11 @@
-package model;
+package model.actor;
 
 import java.util.ArrayList;
 
-import controller.BoundsController;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
+import model.Bounds;
+import model.World;
 
 public class Turtle extends Actor {
 	ArrayList<Image> sprites = new ArrayList<Image>();
@@ -34,14 +35,14 @@ public class Turtle extends Actor {
 	@Override
 	public void act(long now) {		
 		move(speed , 0);
-		if (BoundsController.isFullyOutOfBounds(this) && speed>0) {
-			setGridX(BoundsController.minGridX - 1);
-			System.out.println(getX());
+		if (Bounds.isFullyOutOfBounds(this) && speed>0) {
+			setGridX(Bounds.minGridX - 1);
 		}
-		if (BoundsController.isFullyOutOfBounds(this) && speed<0) {
-			setGridX(BoundsController.maxGridX + 1);
+		if (Bounds.isFullyOutOfBounds(this) && speed<0) {
+			setGridX(Bounds.maxGridX + 1);
 		}
 	}
+	
 	public Turtle(int x, int y, int s) {
 		sprites.add(new Image("file:src/assets/turtle_0.png", World.getGridSize(), World.getGridSize(), true, true));
 		sprites.add(new Image("file:src/assets/turtle_1.png", World.getGridSize(), World.getGridSize(), true, true));

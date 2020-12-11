@@ -4,15 +4,16 @@ import java.io.File;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import model.actor.Frog;
 
-public class MyStage extends World{
+public class Screen extends World{
 	MediaPlayer mediaPlayer;
 	@Override
 	public void act(long now) {
 		
 	}
 	
-	public MyStage() {
+	public Screen() {
 		
 //		mediaPlayer.play();
 //		mediaPlayer.setOnEndOfMedia(new Runnable() {
@@ -43,6 +44,7 @@ public class MyStage extends World{
 		addTurtles(0, 3, -1, 3);
 //		add(new Turtle(1, 3, -1));
 //		add(new Turtle(2, 3, -1));
+		addLog(0, 4, 1, 10);
 		
 		add(new End(6, 1));
 		add(new Frog());

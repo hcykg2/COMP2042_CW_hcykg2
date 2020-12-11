@@ -1,4 +1,4 @@
-package model;
+package model.actor;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,30 +11,17 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
+import model.End;
+import model.World;
 
 public class Frog extends Actor{
 	Image imgW1;
 	Image imgW2;
-	int points = 0;
-	int end = 0;
-	boolean noMove = false;
-	
-	
-	private double speed = 10;
+	private double speed = 5;
 	boolean isMoving = false;
 	boolean isDying = false;
 	private int direction = 0;
-	
-	double movement = 13.3333333*2;
 	int imgSize = World.getGridSize();
-	boolean carDeath = false;
-	boolean waterDeath = false;
-	boolean stop = false;
-	boolean changeScore = false;
-	int carD = 0;
-	double w = 800;
 	ArrayList<End> inter = new ArrayList<End>();
 	
 	public void playMusic() {
@@ -168,22 +155,6 @@ public class Frog extends Actor{
 			double speed = CollisionController.isStandingOn(getWorld(), this, Turtle.class).get(0).getSpeed();
 			move(speed, 0);
 		}
-		
-	}
-	public boolean getStop() {
-		return end==5;
-	}
-	
-	public int getPoints() {
-		return points;
-	}
-	
-	public boolean changeScore() {
-		if (changeScore) {
-			changeScore = false;
-			return true;
-		}
-		return false;
 		
 	}
 	

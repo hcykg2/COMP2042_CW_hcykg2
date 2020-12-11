@@ -9,14 +9,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import model.Turtle;
+import model.actor.Actor;
+import model.actor.Log;
+import model.actor.Turtle;
 
 public abstract class World extends Pane {
     private AnimationTimer timer;
-    private final static int gridSize = 64;
+    private final static int gridSize = 32;
     private final static int gridCountX = 14;
     private final static int gridCountY = 14;
     
@@ -114,16 +115,19 @@ public abstract class World extends Pane {
     }
     
     public void addLog(int x, int y, int s, int length) {
-    	for (int i = 0; i < length; i++) {
-    		add(new Turtle(x + i, y, s));
+    	add(new Log(0, x, y, s));
+    	for (int i = 1; i < length - 1; i++) {
+    		add(new Log(1, x + i, y, s));
     	}
+    	add(new Log(2, x + length - 1, y, s));
     }
 
-    public <A extends Actor> List<A> getObjects(Class<A> cls) {
+    @SuppressWarnings("unchecked")
+	public <A extends Actor> List<A> getObjects(Class<A> actorClass) {
         ArrayList<A> someArray = new ArrayList<A>();
         for (Node n: getChildren()) {
-            if (cls.isInstance(n)) {
-                someArray.add((A)n);
+            if (actorClass.isInstance(n)) {
+                someArray.add((A) n);
             }
         }
         return someArray;
