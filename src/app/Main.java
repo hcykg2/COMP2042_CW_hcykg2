@@ -29,26 +29,7 @@ public class Main extends Application {
 		background.start();
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		start();  
 	}
-	public void createTimer() {
-        timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-
-            }
-        };
-    }
-	public void start() {
-//		background.playMusic();
-    	createTimer();
-        timer.start();
-    }
-
-    public void stop() {
-        timer.stop();
-    }
     
     public void setNumber(int n) {
     	int shift = 0;
