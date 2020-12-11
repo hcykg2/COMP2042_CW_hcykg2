@@ -24,5 +24,7 @@ public class End extends Actor{
 		return activated;
 	}
 	
-
+	public double getSpeed() {
+		return 0;
+	}
 }

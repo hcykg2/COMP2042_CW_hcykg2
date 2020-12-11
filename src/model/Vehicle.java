@@ -22,4 +22,7 @@ public class Vehicle extends Actor {
 		speedMultiplier = speed;
 	}
 
+	public double getSpeed() {
+		return speed;
+	}
 }

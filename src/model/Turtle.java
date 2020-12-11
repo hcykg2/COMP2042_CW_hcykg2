@@ -2,7 +2,7 @@ package model;
 
 import javafx.scene.image.Image;
 
-public class Turtle extends Actor{
+public class Turtle extends Actor {
 	Image turtle1;
 	Image turtle2;
 	Image turtle3;
@@ -10,34 +10,25 @@ public class Turtle extends Actor{
 	int i = 1;
 	boolean bool = true;
 	@Override
-	public void act(long now) {
-
-				if (now/900000000  % 3 ==0) {
-					setImage(turtle2);
-					
-				}
-				else if (now/900000000 % 3 == 1) {
-					setImage(turtle1);
-					
-				}
-				else if (now/900000000 %3 == 2) {
-					setImage(turtle3);
-					
-				}
-			
+	public void act(long now) {		
 		move(speed , 0);
-		if (getX() > 600 && speed>0)
+		if (getX() > 600 && speed>0) {
 			setX(-200);
-		if (getX() < -75 && speed<0)
+			System.out.println(getX());
+		}
+		if (getX() < -75 && speed<0) {
 			setX(600);
+		}
 	}
-	public Turtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image("file:src/assets/TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image("file:src/assets/TurtleAnimation2.png", w, h, true, true);
-		turtle3 = new Image("file:src/assets/TurtleAnimation3.png", w, h, true, true);
-		setX(xpos);
-		setY(ypos);
+	public Turtle(int x, int y, int s) {
+		turtle1 = new Image("file:src/assets/turtle_0.png", World.getGridSize(), World.getGridSize(), true, true);
+		setGridX(x);
+		setGridY(y);
 		speed = s;
-		setImage(turtle2);
+		setImage(turtle1);
+	}
+	
+	public double getSpeed() {
+		return speed;
 	}
 }

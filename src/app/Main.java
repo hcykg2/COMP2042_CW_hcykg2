@@ -5,14 +5,12 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Digit;
 import model.End;
 import model.Frog;
-import model.Log;
 import model.MyStage;
-import model.Turtle;
-import model.WetTurtle;
 import model.World;
 
 public class Main extends Application {
@@ -29,26 +27,8 @@ public class Main extends Application {
 	    Scene scene  = new Scene(background, World.getGridSize() * World.getGridCountX(), World.getGridSize() * World.getGridCountY());
 	    
 	    animal = new Frog();
-		
-		background.add(new Log("file:src/assets/logs.png", 300, 0, 276, -2));
-		background.add(new Log("file:src/assets/logs.png", 300, 400, 276, -2));
-		background.add(new Log("file:src/assets/log3.png", 150, 50, 329, 0.75));
-		background.add(new Log("file:src/assets/log3.png", 150, 270, 329, 0.75));
-		background.add(new Log("file:src/assets/log3.png", 150, 490, 329, 0.75));
-		
-		background.add(new Turtle(500, 376, -1, 130, 130));
-		background.add(new Turtle(300, 376, -1, 130, 130));
-		background.add(new WetTurtle(700, 376, -1, 130, 130));
-		background.add(new WetTurtle(600, 217, -1, 130, 130));
-		background.add(new WetTurtle(400, 217, -1, 130, 130));
-		background.add(new WetTurtle(200, 217, -1, 130, 130));
-//		background.add(new End(13,96));
-//		background.add(new End(141,96));
-		background.add(new End(6, 1));
-//		background.add(new End(141 + 141-13+141-13+1,96));
-//		background.add(new End(141 + 141-13+141-13+141-13+3,96));
 		background.add(animal);
-		background.add(new Digit(0, 30, 360, 25));
+
 		background.start();
 		primaryStage.setScene(scene);
 		primaryStage.show();

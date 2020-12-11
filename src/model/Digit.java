@@ -18,4 +18,7 @@ public class Digit extends Actor{
 		setY(y);
 	}
 	
+	public double getSpeed() {
+		return 0;
+	}
 }

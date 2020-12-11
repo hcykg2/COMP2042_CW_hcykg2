@@ -3,15 +3,16 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import model.Turtle;
 
 public abstract class World extends Pane {
     private AnimationTimer timer;
@@ -104,6 +105,12 @@ public abstract class World extends Pane {
 
     public void remove(Actor actor) {
         getChildren().remove(actor);
+    }
+    
+    public void addTurtles(int x, int y, int s, int count) {
+    	for (int i = 0; i < count; i++) {
+    		add(new Turtle(x + i, y, s));
+    	}
     }
 
     public <A extends Actor> List<A> getObjects(Class<A> cls) {
