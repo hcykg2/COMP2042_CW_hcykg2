@@ -35,11 +35,11 @@ public class Turtle extends Actor {
 	@Override
 	public void act(long now) {		
 		move(speed , 0);
-		if (Bounds.isFullyOutOfBounds(this) && speed>0) {
-			setGridX(Bounds.minGridX - 1);
+		if (Bounds.isFullyOutOfBounds(this) && speed > 0) {
+			moveGrid(-World.getGridCountX() - 1, 0);
 		}
-		if (Bounds.isFullyOutOfBounds(this) && speed<0) {
-			setGridX(Bounds.maxGridX + 1);
+		if (Bounds.isFullyOutOfBounds(this) && speed < 0) {
+			moveGrid(World.getGridCountX() + 1, 0);
 		}
 	}
 	

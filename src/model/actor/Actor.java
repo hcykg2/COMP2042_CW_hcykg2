@@ -28,6 +28,11 @@ public abstract class Actor extends ImageView {
     	setY(y * World.getGridSize());
     }
     
+    public void moveGrid(int dx, int dy) {
+    	setGridX(getGridX() + dx);
+    	setGridY(getGridY() + dy);
+    }
+    
     public double getCoordinateOfGrid(int coordinate) {
     	return coordinate * World.getGridSize();
     }
