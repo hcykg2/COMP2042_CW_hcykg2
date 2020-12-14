@@ -1,4 +1,4 @@
-package model;
+package com.game.model;
 
 import model.actor.Actor;
 

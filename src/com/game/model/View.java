@@ -1,13 +1,19 @@
-package model;
+package com.game.model;
 
 import java.io.File;
+import java.util.ArrayList;
+
+import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.actor.End;
 import model.actor.Frog;
 
 public class View extends World{
+	
 	MediaPlayer mediaPlayer;
+	private ArrayList<Frog> frogList = new ArrayList<Frog>();
+	
 	@Override
 	public void act(long now) {
 		
@@ -53,6 +59,8 @@ public class View extends World{
 		Frog frog = new Frog();
 		add(frog);
 		
+		frogList.add(frog);
+		
 	}
 	
 	public void playMusic() {
@@ -66,4 +74,12 @@ public class View extends World{
 	public void stopMusic() {
 		mediaPlayer.stop();
 	}
+	
+	public Frog getFrog() {
+		return frogList.get(0);
+	}
+	
+	public void keyPressed(KeyEvent event) {
+    	getFrog().moveUp();
+    }
 }

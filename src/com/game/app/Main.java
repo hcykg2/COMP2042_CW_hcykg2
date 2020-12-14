@@ -1,9 +1,11 @@
-package app;
+package com.game.app;
+
+import com.game.controller.GameController;
+import com.game.model.View;
+import com.game.view.ViewManager;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.View;
-import view.ViewManager;
 
 public class Main extends Application {
 	View background;
@@ -14,7 +16,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {	
 		ViewManager viewManager = new ViewManager();
-	    View screen = viewManager.getScreen();
-	    Stage stage = viewManager.getStage();
+		GameController gameController = new GameController(viewManager);
+	    
 	}
 }

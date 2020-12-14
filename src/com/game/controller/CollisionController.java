@@ -1,8 +1,9 @@
-package controller;
+package com.game.controller;
 
 import java.util.ArrayList;
 
-import model.World;
+import com.game.model.World;
+
 import model.actor.Actor;
 import model.actor.Frog;
 

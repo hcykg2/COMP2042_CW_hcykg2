@@ -1,4 +1,4 @@
-package model;
+package com.game.model;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

@@ -1,8 +1,9 @@
 package model.actor;
 
-import controller.CollisionController;
+import com.game.controller.CollisionController;
+import com.game.model.World;
+
 import javafx.scene.image.Image;
-import model.World;
 
 public class End extends Actor{
 	private boolean activated = false;

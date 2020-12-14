@@ -1,8 +1,9 @@
 package model.actor;
 
+import com.game.model.Bounds;
+import com.game.model.World;
+
 import javafx.scene.image.Image;
-import model.Bounds;
-import model.World;
 
 public class Vehicle extends Actor {
 	private double speed = 1;

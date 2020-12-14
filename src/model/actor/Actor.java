@@ -1,8 +1,9 @@
 package model.actor;
 
+import com.game.model.World;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
-import model.World;
 
 
 public abstract class Actor extends ImageView {

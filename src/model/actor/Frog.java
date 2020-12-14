@@ -3,7 +3,10 @@ package model.actor;
 import java.io.File;
 import java.util.ArrayList;
 
-import controller.CollisionController;
+import com.game.controller.CollisionController;
+import com.game.model.World;
+import com.game.util.Direction;
+
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
@@ -11,17 +14,18 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import model.World;
 
 public class Frog extends Actor{
 	Image imgW1;
 	Image imgW2;
+	private static int frogCount = 0;
+	private int frogID;
 	private double speed = 5;
 	private double speedMultiplier;
 	boolean isStandable = false;
 	boolean isMoving = false;
 	boolean isDying = false;
-	private int direction = 0;
+	private Direction direction = Direction.UP;
 	int imgSize = World.getGridSize();
 	ArrayList<End> inter = new ArrayList<End>();
 	
@@ -37,37 +41,32 @@ public class Frog extends Actor{
 	}
 	
 	public Frog() {
+		frogID = frogCount;
+		frogCount++;
 		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
 		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
 		setImage(imgW1);
 		setGridX(6);
 		setGridY(13);
-		setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event){
-				if (!isMoving) {
-					if (event.getCode() == KeyCode.W) {	            	
-		                setDirection(0);
-		                moveGrid.start();
-		            }
-		            else if (event.getCode() == KeyCode.A) {
-		            	setDirection(3);
-		                moveGrid.start();
-		            }
-		            else if (event.getCode() == KeyCode.S) {	            	
-		            	setDirection(2);
-		                moveGrid.start();
-		            }
-		            else if (event.getCode() == KeyCode.D) {
-		            	setDirection(1);
-		                moveGrid.start();
-		            }
-				}
-			}
-		});	
 	}
 	
 	public void moveUp() {
-		setDirection(0);
+		setDirection(Direction.UP);
+		moveGrid.start();
+	}
+	
+	public void moveRight() {
+		setDirection(Direction.RIGHT);
+		moveGrid.start();
+	}
+	
+	public void moveDown() {
+		setDirection(Direction.DOWN);
+		moveGrid.start();
+	}
+	
+	public void moveLeft() {
+		setDirection(Direction.LEFT);
 		moveGrid.start();
 	}
 
@@ -83,13 +82,13 @@ public class Frog extends Actor{
 			
 			if (!isMoving) {
 				setImage(imgW2);
-				if (direction == 0) {
+				if (direction == Direction.UP) {
 					targetGrid = getGridY() - 1;
-				} else if (direction == 1) {
+				} else if (direction == Direction.DOWN) {
 					targetGrid = getGridX() + 1;
-				} else if (direction == 2) {
+				} else if (direction == Direction.LEFT) {
 					targetGrid = getGridY() + 1;
-				} else if (direction == 3) {
+				} else if (direction == Direction.RIGHT) {
 					targetGrid = getGridX() - 1;
 				}
 				targetCoordinate = getCoordinateOfGrid(targetGrid);
@@ -97,16 +96,16 @@ public class Frog extends Actor{
 				isMoving = true;
 			} else {
 				switch(direction) {
-				case 0:
+				case UP:
 					move(0, -speed);
 					break;
-				case 1:
+				case RIGHT:
 					move(speed, 0);
 					break;
-				case 2:
+				case DOWN:
 					move(0, speed);
 					break;
-				case 3:
+				case LEFT:
 					move(-speed, 0);
 					break;
 				default:
@@ -120,7 +119,7 @@ public class Frog extends Actor{
 				stop();
 			}
 			
-			if (direction == 0 || direction == 2) {
+			if (direction == Direction.UP || direction == Direction.DOWN) {
 				if (Math.abs(getY() - targetCoordinate) < speed) {
 					postMoveGrid.start();
 					setY(targetCoordinate);
@@ -163,13 +162,17 @@ public class Frog extends Actor{
 		
 	}
 	
-	public int getDirection() {
+	public boolean getIsMoving() {
+		return isMoving;
+	}
+	
+	public Direction getDirection() {
 		return direction;
 	}
 	
-	public void setDirection(int dir) {
+	public void setDirection(Direction dir) {
 		direction = dir;
-		setRotate(dir * 90);
+		setRotate(dir.getAngle());
 	}
 	
 	public double getSpeedMultiplier() {

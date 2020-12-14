@@ -2,10 +2,11 @@ package model.actor;
 
 import java.util.ArrayList;
 
+import com.game.model.Bounds;
+import com.game.model.World;
+
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
-import model.Bounds;
-import model.World;
 
 public class Turtle extends Actor {
 	ArrayList<Image> sprites = new ArrayList<Image>();
