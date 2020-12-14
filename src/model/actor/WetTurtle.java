@@ -7,7 +7,9 @@ public class WetTurtle extends Actor{
 	Image turtle2;
 	Image turtle3;
 	Image turtle4;
-	private int speed;
+	private double speed;
+	private double speedMultiplier;
+	boolean isStandable = true;
 	int i = 1;
 	boolean bool = true;
 	boolean sunk = false;
@@ -53,5 +55,17 @@ public class WetTurtle extends Actor{
 	
 	public double getSpeed() {
 		return speed;
+	}
+	
+	public double getSpeedMultiplier() {
+		return speedMultiplier;
+	}
+	
+	public void setSpeedMultiplier(double s) {
+		speedMultiplier = s;
+	}
+	
+	public boolean isStandable() {
+		return isStandable;
 	}
 }

@@ -54,6 +54,12 @@ public abstract class Actor extends ImageView {
     }
     
     public abstract double getSpeed();
+    
+    public abstract double getSpeedMultiplier();
+    
+    public abstract void setSpeedMultiplier(double s);
+    
+    public abstract boolean isStandable();
 
     public abstract void act(long now);
 

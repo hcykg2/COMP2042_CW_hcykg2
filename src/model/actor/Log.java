@@ -8,17 +8,19 @@ import model.World;
 
 public class Log extends Actor {
 
-	private double speed;
+	private double speed = 0.5;
+	private double speedMultiplier;
+	boolean isStandable = true;
 	ArrayList<Image> sprites = new ArrayList<Image>(); 
 	
 	@Override
 	public void act(long now) {		
-		move(speed , 0);
-		if (Bounds.isFullyOutOfBounds(this) && speed > 0) {
-			moveGrid(-World.getGridCountX() - 1, 0);
+		move(speed * speedMultiplier , 0);
+		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier > 0) {
+			move(-(Bounds.maxX + World.getGridSize()), 0);
 		}
-		if (Bounds.isFullyOutOfBounds(this) && speed < 0) {
-			moveGrid(World.getGridCountX() + 1, 0);
+		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier < 0) {
+			move(Bounds.maxX + World.getGridSize(), 0);
 		}
 	}
 	
@@ -29,7 +31,7 @@ public class Log extends Actor {
 		setImage(sprites.get(sprite));
 		setGridX(x);
 		setGridY(y);
-		speed = s;
+		speedMultiplier = s;
 		
 	}
 	public boolean getLeft() {
@@ -38,5 +40,17 @@ public class Log extends Actor {
 	
 	public double getSpeed() {
 		return speed;
+	}
+	
+	public double getSpeedMultiplier() {
+		return speedMultiplier;
+	}
+	
+	public void setSpeedMultiplier(double s) {
+		speedMultiplier = s;
+	}
+	
+	public boolean isStandable() {
+		return isStandable;
 	}
 }

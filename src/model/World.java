@@ -108,13 +108,13 @@ public abstract class World extends Pane {
         getChildren().remove(actor);
     }
     
-    public void addTurtles(int x, int y, int s, int count) {
+    public void addTurtles(int x, int y, double s, int count) {
     	for (int i = 0; i < count; i++) {
     		add(new Turtle(x + i, y, s));
     	}
     }
     
-    public void addLog(int x, int y, int s, int length) {
+    public void addLog(int x, int y, double s, int length) {
     	add(new Log(0, x, y, s));
     	for (int i = 1; i < length - 1; i++) {
     		add(new Log(1, x + i, y, s));

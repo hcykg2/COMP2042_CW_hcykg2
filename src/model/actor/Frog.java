@@ -11,13 +11,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import model.End;
 import model.World;
 
 public class Frog extends Actor{
 	Image imgW1;
 	Image imgW2;
 	private double speed = 5;
+	private double speedMultiplier;
+	boolean isStandable = false;
 	boolean isMoving = false;
 	boolean isDying = false;
 	private int direction = 0;
@@ -39,12 +40,11 @@ public class Frog extends Actor{
 		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
 		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
 		setImage(imgW1);
-		setGridX(0);
+		setGridX(6);
 		setGridY(13);
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
 				if (!isMoving) {
-					playMusic();
 					if (event.getCode() == KeyCode.W) {	            	
 		                setDirection(0);
 		                moveGrid.start();
@@ -66,6 +66,11 @@ public class Frog extends Actor{
 		});	
 	}
 	
+	public void moveUp() {
+		setDirection(0);
+		moveGrid.start();
+	}
+
 	// GRID MOVEMENT
 	
 	AnimationTimer moveGrid = new AnimationTimer() {
@@ -96,13 +101,13 @@ public class Frog extends Actor{
 					move(0, -speed);
 					break;
 				case 1:
-					move (speed, 0);
+					move(speed, 0);
 					break;
 				case 2:
 					move(0, speed);
 					break;
 				case 3:
-					move (-speed, 0);
+					move(-speed, 0);
 					break;
 				default:
 					break;
@@ -119,14 +124,12 @@ public class Frog extends Actor{
 				if (Math.abs(getY() - targetCoordinate) < speed) {
 					postMoveGrid.start();
 					setY(targetCoordinate);
-					isMoving = false;
 					stop();
 				}
 			} else {
 				if (Math.abs(getX() - targetCoordinate) < speed) {
 					postMoveGrid.start();
 					setX(targetCoordinate);
-					isMoving = false;
 					stop();
 				}
 			}
@@ -134,13 +137,14 @@ public class Frog extends Actor{
 	};
 	
 	AnimationTimer postMoveGrid = new AnimationTimer() {
-		int i = 25;
+		int i = 15;
 		@Override
 		public void handle(long now) {
 			i--;
 			if (i <= 0) {
 				setImage(imgW1);
-				i = 25;
+				i = 15;
+				isMoving = false;
 				stop();
 			}
 		}
@@ -151,9 +155,10 @@ public class Frog extends Actor{
 //		if (CollisionController.getCollidedActors(getWorld(), this, Vehicle.class).size() > 0) {
 //			System.out.println("wow");
 //		}
-		if (CollisionController.isStandingOn(getWorld(), this, Turtle.class).size() > 0) {
-			double speed = CollisionController.isStandingOn(getWorld(), this, Turtle.class).get(0).getSpeed();
-			move(speed, 0);
+		if (CollisionController.isStandingOnStandable(getWorld(), this).size() > 0) {
+			double speed = CollisionController.isStandingOn(getWorld(), this, Actor.class).get(0).getSpeed();
+			double speedMultiplier = CollisionController.isStandingOn(getWorld(), this, Actor.class).get(0).getSpeedMultiplier();
+			move(speed * speedMultiplier, 0);
 		}
 		
 	}
@@ -165,5 +170,17 @@ public class Frog extends Actor{
 	public void setDirection(int dir) {
 		direction = dir;
 		setRotate(dir * 90);
+	}
+	
+	public double getSpeedMultiplier() {
+		return speedMultiplier;
+	}
+	
+	public void setSpeedMultiplier(double s) {
+		speedMultiplier = s;
+	}
+	
+	public boolean isStandable() {
+		return isStandable;
 	}
 }

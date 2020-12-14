@@ -1,19 +1,23 @@
 package model.actor;
 
 import javafx.scene.image.Image;
+import model.Bounds;
 import model.World;
 
 public class Vehicle extends Actor {
-	private int speed = 1;
-	private int speedMultiplier;
+	private double speed = 1;
+	private double speedMultiplier;
+	boolean isStandable = false;
 	
 	@Override
-	public void act(long now) {
-		move(speed * speedMultiplier, 0);
-		if (getX() > 600 && speedMultiplier>0)
-			setX(-200);
-		if (getX() < -50 && speedMultiplier<0)
-			setX(600);
+	public void act(long now) {		
+		move(speed * speedMultiplier , 0);
+		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier > 0) {
+			move(-(Bounds.maxX + World.getGridSize()), 0);
+		}
+		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier < 0) {
+			move(Bounds.maxX + World.getGridSize(), 0);
+		}
 	}
 	
 	public Vehicle(String imageLink, int x, int y, int speed, int width) {
@@ -25,5 +29,17 @@ public class Vehicle extends Actor {
 
 	public double getSpeed() {
 		return speed;
+	}
+	
+	public double getSpeedMultiplier() {
+		return speedMultiplier;
+	}
+	
+	public void setSpeedMultiplier(double s) {
+		speedMultiplier = s;
+	}
+	
+	public boolean isStandable() {
+		return isStandable;
 	}
 }

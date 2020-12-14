@@ -13,14 +13,15 @@ public class ViewManager {
 	
 	public ViewManager() {
 		screen = new Screen();
-		scene  = new Scene(screen, World.getGridSize() * World.getGridCountX(), World.getGridSize() * World.getGridCountY());
+		scene = new Scene(screen, World.getGridSize() * World.getGridCountX(), World.getGridSize() * World.getGridCountY());
+		
 		stage = new Stage();
 		screen.start();
 		stage.setScene(scene);
 		stage.show();
 	}
 	
-	public Stage getPrimaryStage() {
+	public Stage getStage() {
 		return stage;
 	}
 	

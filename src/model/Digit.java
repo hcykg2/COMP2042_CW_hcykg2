@@ -6,6 +6,10 @@ import model.actor.Actor;
 public class Digit extends Actor{
 	int dim;
 	Image im1;
+	double speed = 0;
+	double speedMultiplier;
+	boolean isStandable = false;
+	
 	@Override
 	public void act(long now) {
 		// TODO Auto-generated method stub
@@ -20,6 +24,18 @@ public class Digit extends Actor{
 	}
 	
 	public double getSpeed() {
-		return 0;
+		return speed;
+	}
+	
+	public double getSpeedMultiplier() {
+		return speedMultiplier;
+	}
+	
+	public void setSpeedMultiplier(double s) {
+		speedMultiplier = s;
+	}
+	
+	public boolean isStandable() {
+		return isStandable;
 	}
 }

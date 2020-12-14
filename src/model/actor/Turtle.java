@@ -9,7 +9,9 @@ import model.World;
 
 public class Turtle extends Actor {
 	ArrayList<Image> sprites = new ArrayList<Image>();
-	private int speed;
+	private double speed = 0.5;
+	private double speedMultiplier;
+	boolean isStandable = true;
 	int i = 1;
 	boolean bool = true;
 	
@@ -34,27 +36,39 @@ public class Turtle extends Actor {
 	
 	@Override
 	public void act(long now) {		
-		move(speed , 0);
-		if (Bounds.isFullyOutOfBounds(this) && speed > 0) {
-			moveGrid(-World.getGridCountX() - 1, 0);
+		move(speed * speedMultiplier , 0);
+		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier > 0) {
+			move(-(Bounds.maxX + World.getGridSize()), 0);
 		}
-		if (Bounds.isFullyOutOfBounds(this) && speed < 0) {
-			moveGrid(World.getGridCountX() + 1, 0);
+		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier < 0) {
+			move(Bounds.maxX + World.getGridSize(), 0);
 		}
 	}
 	
-	public Turtle(int x, int y, int s) {
+	public Turtle(int x, int y, double s) {
 		sprites.add(new Image("file:src/assets/turtle_0.png", World.getGridSize(), World.getGridSize(), true, true));
 		sprites.add(new Image("file:src/assets/turtle_1.png", World.getGridSize(), World.getGridSize(), true, true));
 		sprites.add(new Image("file:src/assets/turtle_2.png", World.getGridSize(), World.getGridSize(), true, true));
 		setGridX(x);
 		setGridY(y);
-		speed = s;
+		speedMultiplier = s;
 		setImage(sprites.get(0));
 		animation.start();
 	}
 	
 	public double getSpeed() {
 		return speed;
+	}
+	
+	public double getSpeedMultiplier() {
+		return speedMultiplier;
+	}
+	
+	public void setSpeedMultiplier(double s) {
+		speedMultiplier = s;
+	}
+	
+	public boolean isStandable() {
+		return isStandable;
 	}
 }

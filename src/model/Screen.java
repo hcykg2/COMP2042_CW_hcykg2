@@ -1,9 +1,9 @@
 package model;
 
 import java.io.File;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import model.actor.End;
 import model.actor.Frog;
 
 public class Screen extends World{
@@ -12,7 +12,7 @@ public class Screen extends World{
 	public void act(long now) {
 		
 	}
-	
+
 	public Screen() {
 		
 //		mediaPlayer.play();
@@ -42,12 +42,17 @@ public class Screen extends World{
 		addRow("file:src/assets/tile_road.png", 12, false);
 		addRow("file:src/assets/tile_grass.png", 13, false);
 		addTurtles(0, 3, -1, 3);
-//		add(new Turtle(1, 3, -1));
-//		add(new Turtle(2, 3, -1));
-		addLog(0, 4, 1, 10);
+		addTurtles(6, 3, -1, 3);
+		addLog(2, 4, 1.5, 5);
+		addLog(9, 4, 1.5, 5);
+		addLog(0, 5, 1, 3);
+		addLog(5, 5, 1, 3);
+		addLog(10, 5, 1, 3);
 		
 		add(new End(6, 1));
-		add(new Frog());
+		Frog frog = new Frog();
+		add(frog);
+		
 	}
 	
 	public void playMusic() {
@@ -57,7 +62,7 @@ public class Screen extends World{
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	    mediaPlayer.play();
 	}
-	
+
 	public void stopMusic() {
 		mediaPlayer.stop();
 	}
