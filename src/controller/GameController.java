@@ -1,10 +1,18 @@
 package controller;
 
 import javafx.animation.AnimationTimer;
+import model.View;
+import view.ViewManager;
 
 // scoring, handle input, switch screens,
 public class GameController {
 	private int score;
+	private View currentScreen;
+	private ViewManager viewManager;
+	
+	public GameController(ViewManager viewManager) {
+		this.viewManager = viewManager;
+	}
 	
 	AnimationTimer gameLoop = new AnimationTimer() {
 

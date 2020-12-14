@@ -6,14 +6,14 @@ import javafx.scene.media.MediaPlayer;
 import model.actor.End;
 import model.actor.Frog;
 
-public class Screen extends World{
+public class View extends World{
 	MediaPlayer mediaPlayer;
 	@Override
 	public void act(long now) {
 		
 	}
 
-	public Screen() {
+	public View() {
 		
 //		mediaPlayer.play();
 //		mediaPlayer.setOnEndOfMedia(new Runnable() {

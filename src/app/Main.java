@@ -2,11 +2,11 @@ package app;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.Screen;
+import model.View;
 import view.ViewManager;
 
 public class Main extends Application {
-	Screen background;
+	View background;
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -14,7 +14,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {	
 		ViewManager viewManager = new ViewManager();
-	    Screen screen = viewManager.getScreen();
+	    View screen = viewManager.getScreen();
 	    Stage stage = viewManager.getStage();
 	}
 }

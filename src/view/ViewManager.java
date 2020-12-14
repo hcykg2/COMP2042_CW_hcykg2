@@ -2,17 +2,17 @@ package view;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Screen;
+import model.View;
 import model.World;
 
 public class ViewManager {
 
-	private Screen screen;
+	private View screen;
 	private Scene scene;
 	private Stage stage;
 	
 	public ViewManager() {
-		screen = new Screen();
+		screen = new View();
 		scene = new Scene(screen, World.getGridSize() * World.getGridCountX(), World.getGridSize() * World.getGridCountY());
 		
 		stage = new Stage();
@@ -25,7 +25,7 @@ public class ViewManager {
 		return stage;
 	}
 	
-	public Screen getScreen() {
+	public View getScreen() {
 		return screen;
 	}
 }
