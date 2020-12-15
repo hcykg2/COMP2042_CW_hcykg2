@@ -1,4 +1,4 @@
-package model.actor;
+package com.game.model.actor;
 
 import javafx.scene.image.Image;
 

@@ -1,4 +1,4 @@
-package model.actor;
+package com.game.model.actor;
 
 import com.game.model.Bounds;
 import com.game.model.World;

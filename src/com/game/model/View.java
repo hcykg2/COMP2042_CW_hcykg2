@@ -3,11 +3,12 @@ package com.game.model;
 import java.io.File;
 import java.util.ArrayList;
 
+import com.game.model.actor.End;
+import com.game.model.actor.Frog;
+
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import model.actor.End;
-import model.actor.Frog;
 
 public class View extends World{
 	

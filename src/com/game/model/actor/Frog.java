@@ -1,4 +1,4 @@
-package model.actor;
+package com.game.model.actor;
 
 import java.io.File;
 import java.util.ArrayList;

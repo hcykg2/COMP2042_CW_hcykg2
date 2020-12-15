@@ -1,7 +1,8 @@
 package com.game.model;
 
+import com.game.model.actor.Actor;
+
 import javafx.scene.image.Image;
-import model.actor.Actor;
 
 public class Digit extends Actor{
 	int dim;

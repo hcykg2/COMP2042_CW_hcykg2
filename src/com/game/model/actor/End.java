@@ -1,4 +1,4 @@
-package model.actor;
+package com.game.model.actor;
 
 import com.game.controller.CollisionController;
 import com.game.model.World;

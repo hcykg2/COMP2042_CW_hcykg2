@@ -1,6 +1,6 @@
 package com.game.model;
 
-import model.actor.Actor;
+import com.game.model.actor.Actor;
 
 public class Bounds {
 	public static final int minGridX = 0;

@@ -3,9 +3,8 @@ package com.game.controller;
 import java.util.ArrayList;
 
 import com.game.model.World;
-
-import model.actor.Actor;
-import model.actor.Frog;
+import com.game.model.actor.Actor;
+import com.game.model.actor.Frog;
 
 public class CollisionController<A> {
 	

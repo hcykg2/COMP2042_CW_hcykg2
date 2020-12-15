@@ -3,6 +3,11 @@ package com.game.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.game.model.actor.Actor;
+import com.game.model.actor.Log;
+import com.game.model.actor.Turtle;
+
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,9 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import model.actor.Actor;
-import model.actor.Log;
-import model.actor.Turtle;
 
 public abstract class World extends Pane {
     private AnimationTimer timer;
