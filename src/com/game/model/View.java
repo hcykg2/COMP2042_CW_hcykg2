@@ -79,8 +79,4 @@ public class View extends World{
 	public Frog getFrog() {
 		return frogList.get(0);
 	}
-	
-	public void keyPressed(KeyEvent event) {
-    	getFrog().moveUp();
-    }
 }

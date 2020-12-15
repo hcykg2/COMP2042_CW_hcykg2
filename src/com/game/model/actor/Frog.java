@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import com.game.controller.CollisionController;
+import com.game.model.Bounds;
 import com.game.model.World;
 import com.game.util.Direction;
 
@@ -50,24 +51,13 @@ public class Frog extends Actor{
 		setGridY(13);
 	}
 	
-	public void moveUp() {
-		setDirection(Direction.UP);
-		moveGrid.start();
-	}
-	
-	public void moveRight() {
-		setDirection(Direction.RIGHT);
-		moveGrid.start();
-	}
-	
-	public void moveDown() {
-		setDirection(Direction.DOWN);
-		moveGrid.start();
-	}
-	
-	public void moveLeft() {
-		setDirection(Direction.LEFT);
-		moveGrid.start();
+	public void tryMove(Direction dir) {
+		if (!isMoving) {
+			setDirection(dir);
+			if (Bounds.canMoveInDirection(this, dir) && !isMoving) {
+				moveGrid.start();
+			}
+		}
 	}
 
 	// GRID MOVEMENT
@@ -84,11 +74,11 @@ public class Frog extends Actor{
 				setImage(imgW2);
 				if (direction == Direction.UP) {
 					targetGrid = getGridY() - 1;
-				} else if (direction == Direction.DOWN) {
-					targetGrid = getGridX() + 1;
-				} else if (direction == Direction.LEFT) {
-					targetGrid = getGridY() + 1;
 				} else if (direction == Direction.RIGHT) {
+					targetGrid = getGridX() + 1;
+				} else if (direction == Direction.DOWN) {
+					targetGrid = getGridY() + 1;
+				} else if (direction == Direction.LEFT) {
 					targetGrid = getGridX() - 1;
 				}
 				targetCoordinate = getCoordinateOfGrid(targetGrid);
@@ -136,13 +126,14 @@ public class Frog extends Actor{
 	};
 	
 	AnimationTimer postMoveGrid = new AnimationTimer() {
-		int i = 15;
+		int time = 15;
+		int i = time;
 		@Override
 		public void handle(long now) {
 			i--;
 			if (i <= 0) {
 				setImage(imgW1);
-				i = 15;
+				i = time;
 				isMoving = false;
 				stop();
 			}

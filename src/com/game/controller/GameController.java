@@ -2,6 +2,8 @@ package com.game.controller;
 
 import com.game.model.View;
 import com.game.model.World;
+import com.game.util.Direction;
+import com.game.util.Consts;
 import com.game.view.ViewManager;
 
 import javafx.animation.AnimationTimer;
@@ -28,7 +30,9 @@ public class GameController {
 	}
 	
 	public void keyPressed(KeyEvent event) {
-    	currentView.getFrog().moveUp();
+		if (Consts.keyToDirectionFrog1.containsKey(event.getCode())) {
+			currentView.getFrog().tryMove(Consts.keyToDirectionFrog1.get(event.getCode()));
+		}
     }
 	
 	AnimationTimer gameLoop = new AnimationTimer() {

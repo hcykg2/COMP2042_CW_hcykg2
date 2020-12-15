@@ -1,6 +1,7 @@
 package com.game.model;
 
 import com.game.model.actor.Actor;
+import com.game.util.Direction;
 
 public class Bounds {
 	public static final int minGridX = 0;
@@ -28,15 +29,15 @@ public class Bounds {
 		}
 	}
 	
-	public static boolean canMoveInDirection(Actor actor, int dir) {
+	public static boolean canMoveInDirection(Actor actor, Direction dir) {
 		switch (dir) {
-			case 0:
+			case UP:
 				return actor.getGridY() > minGridY;
-			case 1:
+			case RIGHT:
 				return actor.getGridX() < maxGridX;
-			case 2:
+			case DOWN:
 				return actor.getGridY() < maxGridY;
-			case 3:
+			case LEFT:
 				return actor.getGridX() > minGridX;
 			default:
 				return false;
