@@ -140,6 +140,14 @@ public class Frog extends Actor{
 		}
 	};
 	
+	AnimationTimer death = new AnimationTimer() {
+		int time = 120;
+		@Override
+		public void handle(long arg0) {
+			
+		}
+	};
+	
 	@Override
 	public void act(long now) {
 //		if (CollisionController.getCollidedActors(getWorld(), this, Vehicle.class).size() > 0) {

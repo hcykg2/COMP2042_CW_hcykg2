@@ -2,23 +2,18 @@ package com.game.controller;
 
 import com.game.model.View;
 import com.game.model.World;
-import com.game.util.Direction;
 import com.game.util.Consts;
 import com.game.view.ViewManager;
 
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 // scoring, switch screens,
 public class GameController {
 	private int score;
 	private View currentView;
 	private ViewManager viewManager;
-	private EventHandler<KeyEvent> onKeyPress;
 	
 	public GameController(ViewManager viewManager) {
 		this.viewManager = viewManager;
