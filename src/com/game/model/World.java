@@ -7,23 +7,16 @@ import java.util.List;
 import com.game.model.actor.Actor;
 import com.game.model.actor.Log;
 import com.game.model.actor.Turtle;
-import com.game.model.text.GameChar;
 import com.game.util.TextColor;
 
 import javafx.animation.AnimationTimer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 public abstract class World extends Pane {
     private AnimationTimer timer;
     private final static int gridSize = 32;
-    private final static int gridCountX = 14;
+    private final static int gridCountX = 16;
     private final static int gridCountY = 14;
     
     public World() {

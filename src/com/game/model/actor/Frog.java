@@ -19,7 +19,6 @@ import javafx.scene.media.Media;
 public class Frog extends Actor{
 	Image imgW1;
 	Image imgW2;
-	private static int frogCount = 0;
 	private int frogID;
 	private double speed = 5;
 	private double speedMultiplier;
@@ -41,9 +40,8 @@ public class Frog extends Actor{
 		return speed;
 	}
 	
-	public Frog() {
-		frogID = frogCount;
-		frogCount++;
+	public Frog(int id) {
+		frogID = id;
 		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
 		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
 		setImage(imgW1);
@@ -153,12 +151,16 @@ public class Frog extends Actor{
 //		if (CollisionController.getCollidedActors(getWorld(), this, Vehicle.class).size() > 0) {
 //			System.out.println("wow");
 //		}
-		if (CollisionController.isStandingOnStandable(getWorld(), this).size() > 0) {
-			double speed = CollisionController.isStandingOn(getWorld(), this, Actor.class).get(0).getSpeed();
-			double speedMultiplier = CollisionController.isStandingOn(getWorld(), this, Actor.class).get(0).getSpeedMultiplier();
+		if (CollisionController.isStandingOnStandable(getView(), this).size() > 0) {
+			double speed = CollisionController.isStandingOn(getView(), this, Actor.class).get(0).getSpeed();
+			double speedMultiplier = CollisionController.isStandingOn(getView(), this, Actor.class).get(0).getSpeedMultiplier();
 			move(speed * speedMultiplier, 0);
 		}
 		
+	}
+	
+	public int getID() {
+		return frogID;
 	}
 	
 	public boolean getIsMoving() {

@@ -3,7 +3,6 @@ package com.game.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
 public class Consts {

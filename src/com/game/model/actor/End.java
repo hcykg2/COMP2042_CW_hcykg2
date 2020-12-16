@@ -16,7 +16,7 @@ public class End extends Actor{
 	
 	@Override
 	public void act(long now) {
-		if (!activated && CollisionController.getCollidedActors(getWorld(), this, Frog.class).size() > 0) {
+		if (!activated && CollisionController.getCollidedFrogs(getView(), this).size() > 0) {
 			setActivated(true);
 		}
 	}

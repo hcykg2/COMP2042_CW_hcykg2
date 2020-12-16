@@ -1,5 +1,6 @@
 package com.game.model.actor;
 
+import com.game.model.View;
 import com.game.model.World;
 
 import javafx.scene.image.ImageView;
@@ -38,8 +39,8 @@ public abstract class Actor extends ImageView {
     	return coordinate * World.getGridSize();
     }
 
-    public World getWorld() {
-        return (World) getParent();
+    public View getView() {
+        return (View) getParent();
     }
 
     public double getWidth() {

@@ -1,6 +1,5 @@
-package com.game.model.text;
+package com.game.model;
 
-import com.game.model.World;
 import com.game.util.Consts;
 import com.game.util.TextColor;
 

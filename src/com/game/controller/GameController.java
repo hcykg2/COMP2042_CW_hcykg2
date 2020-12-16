@@ -3,6 +3,7 @@ package com.game.controller;
 import com.game.model.View;
 import com.game.model.World;
 import com.game.util.Consts;
+import com.game.util.Levels;
 import com.game.view.ViewManager;
 
 import javafx.animation.AnimationTimer;
@@ -18,6 +19,7 @@ public class GameController {
 	public GameController(ViewManager viewManager) {
 		this.viewManager = viewManager;
 		currentView = new View();
+		Levels.initLevel1(currentView);
 		viewManager.setView(currentView);
 		viewManager.start();
 		currentView.start();
