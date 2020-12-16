@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import com.game.model.actor.End;
 import com.game.model.actor.Frog;
+import com.game.model.text.GameChar;
+import com.game.util.TextColor;
 
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
@@ -61,7 +63,6 @@ public class View extends World{
 		add(frog);
 		
 		frogList.add(frog);
-		
 	}
 	
 	public void playMusic() {

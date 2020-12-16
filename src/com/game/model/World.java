@@ -7,6 +7,8 @@ import java.util.List;
 import com.game.model.actor.Actor;
 import com.game.model.actor.Log;
 import com.game.model.actor.Turtle;
+import com.game.model.text.GameChar;
+import com.game.util.TextColor;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
@@ -25,48 +27,6 @@ public abstract class World extends Pane {
     private final static int gridCountY = 14;
     
     public World() {
-    	
-    	sceneProperty().addListener(new ChangeListener<Scene>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
-				if (newValue != null) {
-					newValue.setOnKeyReleased(new EventHandler<KeyEvent>() {
-
-						@Override
-						public void handle(KeyEvent event) {
-							if(getOnKeyReleased() != null) 
-								getOnKeyReleased().handle(event);
-							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor: myActors) {
-								if (anActor.getOnKeyReleased() != null) {
-									anActor.getOnKeyReleased().handle(event);
-								}
-							}
-						}
-						
-					});
-					
-					newValue.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-						@Override
-						public void handle(KeyEvent event) {
-							if(getOnKeyPressed() != null) 
-								getOnKeyPressed().handle(event);
-							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor: myActors) {
-								if (anActor.getOnKeyPressed() != null) {
-									anActor.getOnKeyPressed().handle(event);
-								}
-							}
-						}
-						
-					});
-				}
-				
-			}
-    		
-		});
     }
 
     public void createTimer() {
@@ -100,6 +60,17 @@ public abstract class World extends Pane {
     public void add(Tile tile) {
         getChildren().add(tile);
     }
+    
+    public void add(GameChar character) {
+        getChildren().add(character);
+    }
+    
+    public void addText(String text, TextColor color, int x, int y) {
+		char[] charArray = text.toCharArray();
+		for (int i = 0; i < charArray.length; i++) {
+			add(new GameChar(charArray[i], color, x * World.getGridSize() + i * World.getGridSize()/2, y * World.getGridSize()));
+		}
+	}
     
     public void addRow(String imageLink, int y, boolean isSafe) {
         for (int i = 0; i < World.getGridCountX(); i++) {
