@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 public abstract class World extends Pane {
     private AnimationTimer timer;
     private final static int gridSize = 32;
-    private final static int gridCountX = 16;
+    private final static int gridCountX = 14;
     private final static int gridCountY = 14;
     
     public World() {
