@@ -51,12 +51,12 @@ public class WetTurtle extends Actor {
 	}
 	
 	public WetTurtle(int x, int y, double s) {
-		sprites.add(new Image("file:src/assets/turtle_wet_0.png", World.getGridSize(), World.getGridSize(), true, true));
-		sprites.add(new Image("file:src/assets/turtle_wet_1.png", World.getGridSize(), World.getGridSize(), true, true));
-		sprites.add(new Image("file:src/assets/turtle_wet_2.png", World.getGridSize(), World.getGridSize(), true, true));
-		sprites.add(new Image("file:src/assets/turtle_wet_3.png", World.getGridSize(), World.getGridSize(), true, true));
-		sprites.add(new Image("file:src/assets/turtle_wet_2.png", World.getGridSize(), World.getGridSize(), true, true));
-		sprites.add(new Image("file:src/assets/turtle_wet_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/turtle_wet_0.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/turtle_wet_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/turtle_wet_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/turtle_wet_3.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/turtle_wet_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/turtle_wet_1.png", World.getGridSize(), World.getGridSize(), true, true));
 		setGridX(x);
 		setGridY(y);
 		speedMultiplier = s;

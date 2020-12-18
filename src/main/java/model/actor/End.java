@@ -10,8 +10,8 @@ public class End extends Actor{
 	private double speedMultiplier;
 	private static boolean isStandable = false;
 	
-	Image img1 = new Image("file:src/assets/end.png", 2 * World.getGridSize(), 2 * World.getGridSize(), true, true);
-	Image img2 = new Image("file:src/assets/end_frog.png", 2 * World.getGridSize(), 2 * World.getGridSize(), true, true);
+	Image img1 = new Image("file:src/main/resources/assets/end.png", 2 * World.getGridSize(), 2 * World.getGridSize(), true, true);
+	Image img2 = new Image("file:src/main/resources/assets/end_frog.png", 2 * World.getGridSize(), 2 * World.getGridSize(), true, true);
 	
 	@Override
 	public void act(long now) {

@@ -33,8 +33,22 @@ public class Frog extends Actor{
 	boolean forceStopMove = false;
 	boolean doneFlag = false;
 	
-	public void playMusic() {
-		String musicFile = "src/assets/jump2.wav"; 
+	public void playJumpSound() {
+		String musicFile = "src/main/resources/assets/audio/jump.wav"; 
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		AudioClip mediaPlayer = new AudioClip(sound.getSource());
+	    mediaPlayer.play();
+	}
+	
+	public void playGoalSound() {
+		String musicFile = "src/main/resources/assets/audio/goal.wav"; 
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		AudioClip mediaPlayer = new AudioClip(sound.getSource());
+	    mediaPlayer.play();
+	}
+	
+	public void playDeathSound() {
+		String musicFile = "src/main/resources/assets/audio/death.wav"; 
 		Media sound = new Media(new File(musicFile).toURI().toString());
 		AudioClip mediaPlayer = new AudioClip(sound.getSource());
 	    mediaPlayer.play();
@@ -45,17 +59,17 @@ public class Frog extends Actor{
 	}
 	
 	public Frog(int id) {
-		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
-		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
-		normalDeathSprites.add(new Image("file:src/assets/frog_death_normal_0.png", World.getGridSize(), World.getGridSize(), true, true));
-		normalDeathSprites.add(new Image("file:src/assets/frog_death_normal_1.png", World.getGridSize(), World.getGridSize(), true, true));
-		normalDeathSprites.add(new Image("file:src/assets/frog_death_normal_2.png", World.getGridSize(), World.getGridSize(), true, true));
-		normalDeathSprites.add(new Image("file:src/assets/frog_death_normal_3.png", World.getGridSize(), World.getGridSize(), true, true));
+		imgW1 = new Image("file:src/main/resources/assets/frogUp.png", imgSize, imgSize, true, true);
+		imgW2 = new Image("file:src/main/resources/assets/frogUp2.png", imgSize, imgSize, true, true);
+		normalDeathSprites.add(new Image("file:src/main/resources/assets/frog_death_normal_0.png", World.getGridSize(), World.getGridSize(), true, true));
+		normalDeathSprites.add(new Image("file:src/main/resources/assets/frog_death_normal_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		normalDeathSprites.add(new Image("file:src/main/resources/assets/frog_death_normal_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		normalDeathSprites.add(new Image("file:src/main/resources/assets/frog_death_normal_3.png", World.getGridSize(), World.getGridSize(), true, true));
 		
-		waterDeathSprites.add(new Image("file:src/assets/frog_death_water_0.png", World.getGridSize(), World.getGridSize(), true, true));
-		waterDeathSprites.add(new Image("file:src/assets/frog_death_water_1.png", World.getGridSize(), World.getGridSize(), true, true));
-		waterDeathSprites.add(new Image("file:src/assets/frog_death_water_2.png", World.getGridSize(), World.getGridSize(), true, true));
-		waterDeathSprites.add(new Image("file:src/assets/frog_death_water_3.png", World.getGridSize(), World.getGridSize(), true, true));
+		waterDeathSprites.add(new Image("file:src/main/resources/assets/frog_death_water_0.png", World.getGridSize(), World.getGridSize(), true, true));
+		waterDeathSprites.add(new Image("file:src/main/resources/assets/frog_death_water_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		waterDeathSprites.add(new Image("file:src/main/resources/assets/frog_death_water_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		waterDeathSprites.add(new Image("file:src/main/resources/assets/frog_death_water_3.png", World.getGridSize(), World.getGridSize(), true, true));
 		setImage(imgW1);
 		setGridX(6);
 		setGridY(13);
@@ -65,6 +79,7 @@ public class Frog extends Actor{
 		if (!isMoving && !isDying) {
 			setDirection(dir);
 			if (Bounds.canMoveInDirection(this, dir) && !isMoving) {
+				playJumpSound();
 				moveGrid.start();
 			}
 		}
@@ -186,6 +201,7 @@ public class Frog extends Actor{
 		@Override
 		public void handle(long arg0) {
 			if (sprite == -1) {
+				playDeathSound();
 				if (isMoving) {
 					forceStopMove = true;
 				}
@@ -219,6 +235,7 @@ public class Frog extends Actor{
 		@Override
 		public void handle(long arg0) {
 			if (sprite == -1) {
+				playDeathSound();
 				if (isMoving) {
 					forceStopMove = true;
 				}
@@ -270,6 +287,7 @@ public class Frog extends Actor{
 		if (collidedEnds.size() > 0) {
 			for (int i = 0; i < collidedEnds.size(); i ++) {
 				collidedEnds.get(i).setActivated(true);
+				playGoalSound();
 			}
 			
 			if (isMoving) {

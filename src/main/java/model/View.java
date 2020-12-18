@@ -35,7 +35,7 @@ public class View extends World{
 	}
 	
 	public void playMusic() {
-		String musicFile = "src/assets/Frogger Main Song Theme (loop).mp3";   
+		String musicFile = "src/main/resources/assets/Frogger Main Song Theme (loop).mp3";   
 		Media sound = new Media(new File(musicFile).toURI().toString());
 		mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
@@ -90,7 +90,7 @@ public class View extends World{
     AnimationTimer wipeTimer2;
     
     public void wipe() {
-    	blank = new ImageView(new Image("file:src/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
+    	blank = new ImageView(new Image("file:src/main/resources/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
     	getChildren().add(blank);
     	blank.setX(0);
     	blank.setY(0);
@@ -98,7 +98,7 @@ public class View extends World{
     }
     
     public void wipe2() {
-    	blank = new ImageView(new Image("file:src/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
+    	blank = new ImageView(new Image("file:src/main/resources/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
     	createWipe2();
     	getChildren().add(blank);
     	blank.setX(0);

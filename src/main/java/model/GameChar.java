@@ -30,7 +30,7 @@ public class GameChar extends ImageView{
 		if (Consts.charColorToFilePath.containsKey(charColor)) {
 			img = new Image(Consts.charColorToFilePath.get(charColor), World.getGridSize()/2, World.getGridSize()/2, true, true);
 		} else {
-			img = new Image("file:src/assets/char/char_space", World.getGridSize()/2, World.getGridSize()/2, true, true);
+			img = new Image("file:src/main/resources/assets/char/char_space", World.getGridSize()/2, World.getGridSize()/2, true, true);
 		}
 		setImage(img);
 		setX(x);

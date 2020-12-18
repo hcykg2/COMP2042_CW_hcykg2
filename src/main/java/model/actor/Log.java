@@ -25,9 +25,9 @@ public class Log extends Actor {
 	}
 	
 	public Log(int sprite, int x, int y, double s) {
-		sprites.add(new Image("file:src/assets/log_0.png", World.getGridSize(), World.getGridSize(), true, true));
-		sprites.add(new Image("file:src/assets/log_1.png", World.getGridSize(), World.getGridSize(), true, true));
-		sprites.add(new Image("file:src/assets/log_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/log_0.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/log_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/log_2.png", World.getGridSize(), World.getGridSize(), true, true));
 		setImage(sprites.get(sprite));
 		setGridX(x);
 		setGridY(y);

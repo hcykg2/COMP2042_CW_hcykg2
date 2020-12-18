@@ -1,14 +1,19 @@
 package main.java.controller;
 
+import java.io.File;
+
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import main.java.model.StartMenu;
 import main.java.model.View;
 import main.java.model.World;
 import main.java.util.Consts;
 import main.java.util.Levels;
 import main.java.model.Level;
+import main.java.model.ScoreView;
 import main.java.view.ViewManager;
 
 // scoring, switch screens,
@@ -35,8 +40,8 @@ public class GameController {
 			currentView.getFrog().tryMove(Consts.keyToDirectionFrog1.get(event.getCode()));
 		} else {
 			if (StartMenu.class.isInstance(currentView)) {
+				playStartSound();
 				currentView.wipe2();
-//				currentView.setIsDone(true);
 			}
 		}
     }
@@ -75,5 +80,12 @@ public class GameController {
 		
 		newLevel.start();
 		currentScene.addEventHandler(KeyEvent.KEY_PRESSED, this::keyPressed);
+	}
+	
+	public void playStartSound() {
+		String musicFile = "src/main/resources/assets/audio/start.wav"; 
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		AudioClip mediaPlayer = new AudioClip(sound.getSource());
+	    mediaPlayer.play();
 	}
 }

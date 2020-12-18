@@ -46,9 +46,9 @@ public class Turtle extends Actor {
 	}
 	
 	public Turtle(int x, int y, double s) {
-		sprites.add(new Image("file:src/assets/turtle_0.png", World.getGridSize(), World.getGridSize(), true, true));
-		sprites.add(new Image("file:src/assets/turtle_1.png", World.getGridSize(), World.getGridSize(), true, true));
-		sprites.add(new Image("file:src/assets/turtle_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/turtle_0.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/turtle_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/main/resources/assets/turtle_2.png", World.getGridSize(), World.getGridSize(), true, true));
 		setGridX(x);
 		setGridY(y);
 		speedMultiplier = s;
