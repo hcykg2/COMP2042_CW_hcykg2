@@ -31,6 +31,8 @@ public class Levels {
 		view.addLog(10, 5, 1, 3);
 		view.add(new Vehicle("file:src/assets/car1.png", 10, 11, 0.5, 1));
 		
+		view.addText("\nlevel 1", TextColor.YELLOW, 5, 0);
+		
 		End end = new End(6, 1);
 		view.add(end);
 		End end2 = new End(9, 1);

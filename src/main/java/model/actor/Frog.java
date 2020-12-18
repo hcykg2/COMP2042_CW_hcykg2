@@ -3,14 +3,18 @@ package main.java.model.actor;
 import java.io.File;
 import java.util.ArrayList;
 
+import com.sun.prism.paint.Stop;
+
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import main.java.controller.CollisionController;
 import main.java.model.Bounds;
 import main.java.model.Tile;
 import main.java.model.World;
+import main.java.util.Consts;
 import main.java.util.Direction;
 
 public class Frog extends Actor{
@@ -24,10 +28,12 @@ public class Frog extends Actor{
 	boolean isStandable = false;
 	boolean isMoving = false;
 	boolean isDying = false;
+	boolean reachedEnd = false;
 	private Direction direction = Direction.UP;
 	int imgSize = World.getGridSize();
 	ArrayList<End> inter = new ArrayList<End>();
-	boolean reachEnd = false;
+	boolean forceStopMove = false;
+	boolean doneFlag = false;
 	
 	public void playMusic() {
 		String musicFile = "src/assets/jump2.wav"; 
@@ -112,14 +118,21 @@ public class Frog extends Actor{
 			}
 			
 			if (moved > 2 * World.getGridSize()) {
-				reachEnd = true;
+				forceStopMove = true;
 				stop();
 			}
 			
-			if (reachEnd == true) {
+			if (forceStopMove) {
 				isMoving = false;
-				reachEnd = false;
+				forceStopMove = false;
 				moved = 0;
+				if(reachedEnd) {
+					setImage(imgW1);
+					setGridX(getView().beginX);
+					setGridY(getView().beginY);
+					getView().activatedEnds++;
+					reachedEnd = false;
+				}
 				stop();
 			}
 
@@ -144,6 +157,21 @@ public class Frog extends Actor{
 		int i = time;
 		@Override
 		public void handle(long now) {
+			
+			if (forceStopMove) {
+				System.out.println("test");
+				isMoving = false;
+				forceStopMove = false;
+				i = time;
+				if(reachedEnd) {
+					setImage(imgW1);
+					setGridX(getView().beginX);
+					setGridY(getView().beginY);
+					getView().activatedEnds++;
+					reachedEnd = false;
+				}
+				stop();
+			}
 			i--;
 			if (i <= 0) {
 				setImage(imgW1);
@@ -157,11 +185,13 @@ public class Frog extends Actor{
 	AnimationTimer death = new AnimationTimer() {
 		int i = 0;
 		int sprite = -1;
-		int time = 120;
+		int time = 60;
 		@Override
 		public void handle(long arg0) {
 			if (sprite == -1) {
-				reachEnd = true;
+				if (isMoving) {
+					forceStopMove = true;
+				}
 				setDirection(Direction.UP);
 				setImage(normalDeathSprites.get(0));
 				isDying = true;
@@ -188,11 +218,13 @@ public class Frog extends Actor{
 	AnimationTimer deathWater = new AnimationTimer() {
 		int i = 0;
 		int sprite = -1;
-		int time = 120;
+		int time = 60;
 		@Override
 		public void handle(long arg0) {
 			if (sprite == -1) {
-				reachEnd = true;
+				if (isMoving) {
+					forceStopMove = true;
+				}
 				setDirection(Direction.UP);
 				setImage(waterDeathSprites.get(0));
 				isDying = true;
@@ -242,15 +274,27 @@ public class Frog extends Actor{
 			for (int i = 0; i < collidedEnds.size(); i ++) {
 				collidedEnds.get(i).setActivated(true);
 			}
-			reachEnd = true;
-			setImage(imgW1);
-			setGridX(getView().beginX);
-			setGridY(getView().beginY);
-			getView().activatedEnds++;
+			
+			if (isMoving) {
+				reachedEnd = true;
+				forceStopMove = true;
+			} else {
+				setImage(imgW1);
+				setGridX(getView().beginX);
+				setGridY(getView().beginY);
+				getView().activatedEnds++;
+				reachedEnd = false;
+			}
 		}
 		
 		if (Bounds.isOutOfBounds(this)) {
 			death.start();
+		}
+		
+		if (getView().getIsLevel() && getView().activatedEnds >= getView().endList.size() && doneFlag == false) {
+			System.out.println("hmmmm");
+			doneFlag = true;
+			getView().wipe2();
 		}
 		
 	}

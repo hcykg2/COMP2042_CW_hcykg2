@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import main.java.model.actor.Actor;
 import main.java.model.actor.Log;
@@ -58,11 +60,19 @@ public abstract class World extends Pane {
         getChildren().add(character);
     }
     
-    public void addText(String text, TextColor color, int x, int y) {
+    public ArrayList<GameChar> addText(String text, TextColor color, int x, int y) {
+    	int dy = 0, j = 0;
 		char[] charArray = text.toCharArray();
+		ArrayList<GameChar> charList = new ArrayList<GameChar>();
 		for (int i = 0; i < charArray.length; i++) {
-			add(new GameChar(charArray[i], color, x * World.getGridSize() + i * World.getGridSize()/2, y * World.getGridSize()));
+			charList.add(new GameChar(charArray[i], color, x * World.getGridSize() + i * World.getGridSize()/2 - j * World.getGridSize()/2, y * World.getGridSize() + dy * World.getGridSize()/2));
+			add(charList.get(i));
+			if (charArray[i] == '\n') {
+				dy++;
+				j = i + 1;
+			}
 		}
+		return charList;
 	}
     
     public void addRow(String imageLink, int y, boolean isSafe) {

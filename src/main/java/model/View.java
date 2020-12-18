@@ -3,6 +3,9 @@ package main.java.model;
 import java.io.File;
 import java.util.ArrayList;
 
+import javafx.animation.AnimationTimer;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.java.model.actor.End;
@@ -10,12 +13,14 @@ import main.java.model.actor.Frog;
 
 public class View extends World{
 	
+	private boolean isLevel;
 	public int beginX = 0;
 	public int beginY = 0;
 	MediaPlayer mediaPlayer;
 	public final ArrayList<Frog> frogList = new ArrayList<Frog>();
 	public final ArrayList<End> endList = new ArrayList<End>();
 	public int activatedEnds = 0;
+	protected boolean isDone = false;
 	
 	@Override
 	public void act(long now) {
@@ -26,6 +31,7 @@ public class View extends World{
 	}
 	
 	public View(int x, int y) {
+		isLevel = true;
 		beginX = x;
 		beginY = y;
 	}
@@ -45,4 +51,60 @@ public class View extends World{
 	public Frog getFrog() {
 		return frogList.get(0);
 	}
+	
+	public boolean getIsDone() {
+		return isDone;
+	}
+	
+	public void setIsDone(boolean done) {
+		isDone = done;
+	}
+	
+	public boolean getIsLevel() {
+		return isLevel;
+	}
+	
+    AnimationTimer wipeTimer = new AnimationTimer() {
+		@Override
+		public void handle(long arg0) {
+			if (blank.getY() > -World.getGridSize() * World.getGridSize()) {
+				blank.setY(blank.getY() - 10);
+			} else {
+				stop();
+			}
+		}
+    };
+
+    ImageView blank;
+    public void createWipe2() {
+    	wipeTimer2 = new AnimationTimer() {
+        	@Override
+        	public void handle(long arg0) {
+        		if (blank.getY() > 0) {
+        			blank.setY(blank.getY() - 10);
+        		} else {
+        			setIsDone(true);
+        			stop();
+        		}
+        	}
+        };
+    }
+    AnimationTimer wipeTimer2;
+    
+    public void wipe() {
+    	blank = new ImageView(new Image("file:src/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
+    	getChildren().add(blank);
+    	blank.setX(0);
+    	blank.setY(0);
+    	wipeTimer.start();
+    }
+    
+    public void wipe2() {
+    	blank = new ImageView(new Image("file:src/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
+    	createWipe2();
+    	getChildren().add(blank);
+    	blank.setX(0);
+    	blank.setY(World.getGridSize() * World.getGridCountY());
+    	wipeTimer2.start();
+    }
 }
