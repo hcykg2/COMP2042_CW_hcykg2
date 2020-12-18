@@ -24,8 +24,6 @@ public class GameController {
 	
 	public GameController(ViewManager viewManager) {
 		this.viewManager = viewManager;
-//		currentView = new View(6, 13);
-//		Levels.initLevel1(currentView);
 		currentView = new StartMenu();
 		viewManager.setView(currentView);
 		viewManager.start();

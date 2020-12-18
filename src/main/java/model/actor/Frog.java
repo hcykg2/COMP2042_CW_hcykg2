@@ -58,7 +58,7 @@ public class Frog extends Actor{
 		return speed;
 	}
 	
-	public Frog(int id) {
+	public Frog() {
 		imgW1 = new Image("file:src/main/resources/assets/frogUp.png", imgSize, imgSize, true, true);
 		imgW2 = new Image("file:src/main/resources/assets/frogUp2.png", imgSize, imgSize, true, true);
 		normalDeathSprites.add(new Image("file:src/main/resources/assets/frog_death_normal_0.png", World.getGridSize(), World.getGridSize(), true, true));

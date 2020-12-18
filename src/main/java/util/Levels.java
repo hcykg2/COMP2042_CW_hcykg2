@@ -39,7 +39,7 @@ public class Levels {
 		End end2 = new End(9, 1);
 		view.add(end2);
 		
-		Frog frog = new Frog(0);
+		Frog frog = new Frog();
 		view.add(frog);
 		view.setFrog(frog);
 		
