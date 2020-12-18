@@ -1,56 +1,67 @@
 package main.java.model.actor;
 
-import javafx.scene.image.Image;
+import java.util.ArrayList;
 
-public class WetTurtle extends Actor{
-	Image turtle1;
-	Image turtle2;
-	Image turtle3;
-	Image turtle4;
-	private double speed;
+import javafx.animation.AnimationTimer;
+import javafx.scene.image.Image;
+import main.java.model.Bounds;
+import main.java.model.World;
+
+public class WetTurtle extends Actor {
+	ArrayList<Image> sprites = new ArrayList<Image>();
+	private double speed = 0.5;
 	private double speedMultiplier;
 	boolean isStandable = true;
 	int i = 1;
 	boolean bool = true;
-	boolean sunk = false;
+	
+	AnimationTimer animation = new AnimationTimer() {
+		int time = 60;
+		int counter = 0;
+		int sprite = 0;
+		@Override
+		public void handle(long arg0) {
+			if (counter < time) {
+				counter++;
+			} else {
+				counter = 0;
+				sprite++;
+				if (sprite == sprites.size()) {
+					sprite = 0;
+				}
+				setImage(sprites.get(sprite));
+			}
+			if(sprite == 3) {
+				isStandable = false;
+			} else {
+				isStandable = true;
+			}
+		}
+	};
+	
 	@Override
-	public void act(long now) {
-
-				if (now/900000000  % 4 ==0) {
-					setImage(turtle2);
-					sunk = false;
-					
-				}
-				else if (now/900000000 % 4 == 1) {
-					setImage(turtle1);
-					sunk = false;
-				}
-				else if (now/900000000 %4 == 2) {
-					setImage(turtle3);
-					sunk = false;
-				} else if (now/900000000 %4 == 3) {
-					setImage(turtle4);
-					sunk = true;
-				}
-			
-		move(speed , 0);
-		if (getX() > 600 && speed>0)
-			setX(-200);
-		if (getX() < -75 && speed<0)
-			setX(600);
+	public void act(long now) {		
+		move(speed * speedMultiplier , 0);
+		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier > 0) {
+			move(-(Bounds.maxX + World.getGridSize()), 0);
+		}
+		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier < 0) {
+			move(Bounds.maxX + World.getGridSize(), 0);
+		}
 	}
-	public WetTurtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image("file:src/assets/TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image("file:src/assets/TurtleAnimation2Wet.png", w, h, true, true);
-		turtle3 = new Image("file:src/assets/TurtleAnimation3Wet.png", w, h, true, true);
-		turtle4 = new Image("file:src/assets/TurtleAnimation4Wet.png", w, h, true, true);
-		setX(xpos);
-		setY(ypos);
-		speed = s;
-		setImage(turtle2);
-	}
-	public boolean isSunk() {
-		return sunk;
+	
+	public WetTurtle(int x, int y, double s) {
+		sprites.add(new Image("file:src/assets/turtle_wet_0.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/assets/turtle_wet_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/assets/turtle_wet_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/assets/turtle_wet_3.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/assets/turtle_wet_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		sprites.add(new Image("file:src/assets/turtle_wet_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		setGridX(x);
+		setGridY(y);
+		speedMultiplier = s;
+		setImage(sprites.get(0));
+		animation.start();
 	}
 	
 	public double getSpeed() {

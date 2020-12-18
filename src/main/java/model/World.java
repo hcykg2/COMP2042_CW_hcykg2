@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import main.java.model.actor.Actor;
 import main.java.model.actor.Log;
 import main.java.model.actor.Turtle;
+import main.java.model.actor.WetTurtle;
 import main.java.util.TextColor;
 
 public abstract class World extends Pane {
@@ -77,6 +78,12 @@ public abstract class World extends Pane {
     public void addTurtles(int x, int y, double s, int count) {
     	for (int i = 0; i < count; i++) {
     		add(new Turtle(x + i, y, s));
+    	}
+    }
+    
+    public void addWetTurtles(int x, int y, double s, int count) {
+    	for (int i = 0; i < count; i++) {
+    		add(new WetTurtle(x + i, y, s));
     	}
     }
     

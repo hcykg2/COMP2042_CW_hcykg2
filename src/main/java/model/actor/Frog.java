@@ -44,15 +44,15 @@ public class Frog extends Actor{
 		frogID = id;
 		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
 		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
-		normalDeathSprites.add(new Image("file:src/assets/turtle_death_normal_0.png", World.getGridSize(), World.getGridSize(), true, true));
-		normalDeathSprites.add(new Image("file:src/assets/turtle_death_normal_1.png", World.getGridSize(), World.getGridSize(), true, true));
-		normalDeathSprites.add(new Image("file:src/assets/turtle_death_normal_2.png", World.getGridSize(), World.getGridSize(), true, true));
-		normalDeathSprites.add(new Image("file:src/assets/turtle_death_normal_3.png", World.getGridSize(), World.getGridSize(), true, true));
+		normalDeathSprites.add(new Image("file:src/assets/frog_death_normal_0.png", World.getGridSize(), World.getGridSize(), true, true));
+		normalDeathSprites.add(new Image("file:src/assets/frog_death_normal_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		normalDeathSprites.add(new Image("file:src/assets/frog_death_normal_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		normalDeathSprites.add(new Image("file:src/assets/frog_death_normal_3.png", World.getGridSize(), World.getGridSize(), true, true));
 		
-		waterDeathSprites.add(new Image("file:src/assets/turtle_death_water_0.png", World.getGridSize(), World.getGridSize(), true, true));
-		waterDeathSprites.add(new Image("file:src/assets/turtle_death_water_1.png", World.getGridSize(), World.getGridSize(), true, true));
-		waterDeathSprites.add(new Image("file:src/assets/turtle_death_water_2.png", World.getGridSize(), World.getGridSize(), true, true));
-		waterDeathSprites.add(new Image("file:src/assets/turtle_death_water_3.png", World.getGridSize(), World.getGridSize(), true, true));
+		waterDeathSprites.add(new Image("file:src/assets/frog_death_water_0.png", World.getGridSize(), World.getGridSize(), true, true));
+		waterDeathSprites.add(new Image("file:src/assets/frog_death_water_1.png", World.getGridSize(), World.getGridSize(), true, true));
+		waterDeathSprites.add(new Image("file:src/assets/frog_death_water_2.png", World.getGridSize(), World.getGridSize(), true, true));
+		waterDeathSprites.add(new Image("file:src/assets/frog_death_water_3.png", World.getGridSize(), World.getGridSize(), true, true));
 		setImage(imgW1);
 		setGridX(6);
 		setGridY(13);
@@ -112,8 +112,7 @@ public class Frog extends Actor{
 			}
 			
 			if (moved > 2 * World.getGridSize()) {
-				postMoveGrid.start();
-				moved = 0;
+				reachEnd = true;
 				stop();
 			}
 			

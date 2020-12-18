@@ -16,7 +16,7 @@ public class Turtle extends Actor {
 	boolean bool = true;
 	
 	AnimationTimer animation = new AnimationTimer() {
-		int time = 120;
+		int time = 60;
 		int counter = 0;
 		int sprite = 0;
 		@Override
