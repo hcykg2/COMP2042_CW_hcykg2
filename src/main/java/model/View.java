@@ -13,11 +13,10 @@ import main.java.model.actor.Frog;
 
 public class View extends World{
 	
-	private boolean isLevel;
 	public int beginX = 0;
 	public int beginY = 0;
 	MediaPlayer mediaPlayer;
-	public final ArrayList<Frog> frogList = new ArrayList<Frog>();
+	private Frog frog = null;
 	public final ArrayList<End> endList = new ArrayList<End>();
 	public int activatedEnds = 0;
 	protected boolean isDone = false;
@@ -31,7 +30,6 @@ public class View extends World{
 	}
 	
 	public View(int x, int y) {
-		isLevel = true;
 		beginX = x;
 		beginY = y;
 	}
@@ -49,7 +47,11 @@ public class View extends World{
 	}
 	
 	public Frog getFrog() {
-		return frogList.get(0);
+		return frog;
+	}
+	
+	public void setFrog(Frog frog) {
+		this.frog = frog;
 	}
 	
 	public boolean getIsDone() {
@@ -58,10 +60,6 @@ public class View extends World{
 	
 	public void setIsDone(boolean done) {
 		isDone = done;
-	}
-	
-	public boolean getIsLevel() {
-		return isLevel;
 	}
 	
     AnimationTimer wipeTimer = new AnimationTimer() {

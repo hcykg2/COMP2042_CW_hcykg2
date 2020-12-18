@@ -1,5 +1,6 @@
 package main.java.util;
 
+import main.java.model.Level;
 import main.java.model.View;
 import main.java.model.actor.End;
 import main.java.model.actor.Frog;
@@ -7,7 +8,7 @@ import main.java.model.actor.Vehicle;
 
 public class Levels {
 	
-	public static void initLevel1(View view) {
+	public static void initLevel1(Level view) {
 		view.addRow("file:src/assets/tile_water.png", 0, false);
 		view.addRow("file:src/assets/tile_end_top.png", 1, false);
 		view.addRow("file:src/assets/tile_end_bottom.png", 2, false);
@@ -33,15 +34,15 @@ public class Levels {
 		
 		view.addText("\nlevel 1", TextColor.YELLOW, 5, 0);
 		
-		End end = new End(6, 1);
+		End end = new End(3, 1);
 		view.add(end);
 		End end2 = new End(9, 1);
 		view.add(end2);
 		
 		Frog frog = new Frog(0);
 		view.add(frog);
+		view.setFrog(frog);
 		
-		view.frogList.add(frog);
 		view.endList.add(end);
 		view.endList.add(end2);
 	}

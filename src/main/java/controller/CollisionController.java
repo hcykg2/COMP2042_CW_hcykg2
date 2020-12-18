@@ -21,18 +21,6 @@ public class CollisionController<A> {
 		return collidedActors;
 	}
 	
-	public static java.util.List<Frog> getCollidedFrogs(View view, Actor actor) {
-		Frog frog;
-		ArrayList<Frog> collidedFrogs = new ArrayList<Frog>();
-		for (int i = 0; i < view.frogList.size(); i++) {
-			frog = view.frogList.get(i);
-			if (frog.intersects(actor.getX() + 1, actor.getY() + 1, actor.getWidth() - 2, actor.getHeight() - 2)) {
-				collidedFrogs.add(frog);
-			}
-		}
-		return collidedFrogs;
-	}
-	
 	public static ArrayList<End> getCollidedEnds(View view, Actor actor) {
 		End end;
 		ArrayList<End> collidedEnds = new ArrayList<End>();

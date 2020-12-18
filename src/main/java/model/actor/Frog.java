@@ -3,18 +3,16 @@ package main.java.model.actor;
 import java.io.File;
 import java.util.ArrayList;
 
-import com.sun.prism.paint.Stop;
+import main.java.model.Level;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import main.java.controller.CollisionController;
 import main.java.model.Bounds;
 import main.java.model.Tile;
 import main.java.model.World;
-import main.java.util.Consts;
 import main.java.util.Direction;
 
 public class Frog extends Actor{
@@ -47,7 +45,6 @@ public class Frog extends Actor{
 	}
 	
 	public Frog(int id) {
-		frogID = id;
 		imgW1 = new Image("file:src/assets/frogUp.png", imgSize, imgSize, true, true);
 		imgW2 = new Image("file:src/assets/frogUp2.png", imgSize, imgSize, true, true);
 		normalDeathSprites.add(new Image("file:src/assets/frog_death_normal_0.png", World.getGridSize(), World.getGridSize(), true, true));
@@ -291,8 +288,7 @@ public class Frog extends Actor{
 			death.start();
 		}
 		
-		if (getView().getIsLevel() && getView().activatedEnds >= getView().endList.size() && doneFlag == false) {
-			System.out.println("hmmmm");
+		if (Level.class.isInstance(getView()) && getView().activatedEnds >= getView().endList.size() && doneFlag == false) {
 			doneFlag = true;
 			getView().wipe2();
 		}

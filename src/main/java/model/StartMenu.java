@@ -9,12 +9,12 @@ import javafx.scene.input.KeyEvent;
 import main.java.util.Consts;
 import main.java.util.TextColor;
 
-public class StartView extends View{
+public class StartMenu extends View{
 	ArrayList<GameChar> infoText = new ArrayList<GameChar>();
 	ArrayList<GameChar> startText = new ArrayList<GameChar>();
 	AnimationTimer startViewTimer;
 	
-	public StartView() {
+	public StartMenu() {
 		blank = new ImageView(new Image("file:src/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
 		getChildren().add(blank);
     	blank.setX(0);
@@ -29,7 +29,7 @@ public class StartView extends View{
 		InfoButton button = new InfoButton(0, 0);
 		getChildren().add(button);
 		
-		infoText.addAll(addText("\nkelvin goh hcykg2 20218707\n\nuse wasd keys to move\navoid enemies\ndo not fall in river\ngood luck", TextColor.YELLOW, 1, 0));
+		infoText.addAll(addText("\nkelvin goh hcykg2 20218707\n\nuse wasd keys to move\navoid enemies\ndo not fall in river\nreach the end\n\ngood luck", TextColor.YELLOW, 1, 0));
 		for(int i = 0; i < infoText.size(); i++) {
 			infoText.get(i).setOpacity(0);
 		}
