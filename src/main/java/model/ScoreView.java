@@ -91,6 +91,9 @@ public class ScoreView extends View {
 						int i = 0;
 						@Override
 						public void handle(long arg0) {
+							if (i == 0) {
+								playScoreSound();
+							}
 							if (i <= 180) {
 								i++;
 							} else {
@@ -101,8 +104,8 @@ public class ScoreView extends View {
 						}
 						
 					};
-					playScoreSound();
 					wait.start();
+					stop();
 				}
 			}
 		};

@@ -3,7 +3,7 @@ package main.java.model.actor;
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
-import main.java.model.Bounds;
+import main.java.controller.BoundsController;
 import main.java.model.World;
 
 public class Log extends Actor {
@@ -16,11 +16,11 @@ public class Log extends Actor {
 	@Override
 	public void act(long now) {		
 		move(speed * speedMultiplier , 0);
-		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier > 0) {
-			move(-(Bounds.maxX + World.getGridSize()), 0);
+		if (BoundsController.isFullyOutOfBounds(this) && speedMultiplier > 0) {
+			move(-(BoundsController.maxX + World.getGridSize()), 0);
 		}
-		if (Bounds.isFullyOutOfBounds(this) && speedMultiplier < 0) {
-			move(Bounds.maxX + World.getGridSize(), 0);
+		if (BoundsController.isFullyOutOfBounds(this) && speedMultiplier < 0) {
+			move(BoundsController.maxX + World.getGridSize(), 0);
 		}
 	}
 	

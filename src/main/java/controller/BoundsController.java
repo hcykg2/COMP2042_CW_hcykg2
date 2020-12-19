@@ -1,5 +1,6 @@
-package main.java.model;
+package main.java.controller;
 
+import main.java.model.World;
 import main.java.model.actor.Actor;
 import main.java.util.Direction;
 
@@ -8,7 +9,7 @@ import main.java.util.Direction;
  * @author Kelvin
  *
  */
-public class Bounds {
+public class BoundsController {
 	public static final int minGridX = 0;
 	public static final int minGridY = 0;
 	public static final int maxGridX = World.getGridCountX() - 1;

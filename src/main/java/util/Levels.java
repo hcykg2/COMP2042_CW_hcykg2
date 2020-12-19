@@ -8,89 +8,102 @@ import main.java.model.actor.Vehicle;
 
 public class Levels {
 	public static final int numOfLevels = 2;
+	Level level;
 	
-	public static void initLevel(Level view, int level) {
-		switch (level) {
+	public static void initLevel(Level level, int levelNum) {
+		switch (levelNum) {
 			case 0:
-				view.addRow("file:src/main/resources/assets/tile_water.png", 0, false);
-				view.addRow("file:src/main/resources/assets/tile_end_top.png", 1, false);
-				view.addRow("file:src/main/resources/assets/tile_end_bottom.png", 2, false);
-				view.addRow("file:src/main/resources/assets/tile_water.png", 3, false);
-				view.addRow("file:src/main/resources/assets/tile_water.png", 4, false);
-				view.addRow("file:src/main/resources/assets/tile_water.png", 5, false);
-				view.addRow("file:src/main/resources/assets/tile_grass.png", 6, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 7, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 8, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 9, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 10, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 11, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 12, true);
-				view.addRow("file:src/main/resources/assets/tile_grass.png", 13, true);
-				view.addTurtles(0, 3, -1, 3);
-				view.addTurtles(6, 3, -1, 3);
-				view.addLog(2, 4, 1.5, 5);
-				view.addLog(9, 4, 1.5, 5);
-				view.addLog(0, 5, 1, 3);
-				view.addLog(5, 5, 1, 3);
-				view.addLog(10, 5, 1, 3);
-				view.add(new Vehicle("file:src/main/resources/assets/car1.png", 10, 11, 0.5, 1));
-				
-				view.addText("\nlevel 1", TextColor.YELLOW, 5, 0);
-				
-				End end = new End(3, 1);
-				view.add(end);
-				End end2 = new End(9, 1);
-				view.add(end2);
-				
-				Frog frog = new Frog();
-				view.add(frog);
-				view.setFrog(frog);
-				
-				view.endList.add(end);
-				view.endList.add(end2);
+				level1(level);
 				break;
 			case 1:
-				view.addRow("file:src/main/resources/assets/tile_water.png", 0, false);
-				view.addRow("file:src/main/resources/assets/tile_end_top.png", 1, false);
-				view.addRow("file:src/main/resources/assets/tile_end_bottom.png", 2, false);
-				view.addRow("file:src/main/resources/assets/tile_water.png", 3, false);
-				view.addRow("file:src/main/resources/assets/tile_water.png", 4, false);
-				view.addRow("file:src/main/resources/assets/tile_water.png", 5, false);
-				view.addRow("file:src/main/resources/assets/tile_grass.png", 6, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 7, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 8, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 9, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 10, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 11, true);
-				view.addRow("file:src/main/resources/assets/tile_road.png", 12, true);
-				view.addRow("file:src/main/resources/assets/tile_grass.png", 13, true);
-				view.addTurtles(0, 3, -1, 3);
-				view.addTurtles(6, 3, -1, 3);
-				view.addLog(2, 4, 1.5, 5);
-				view.addLog(9, 4, 1.5, 5);
-				view.addLog(0, 5, 1, 3);
-				view.addLog(5, 5, 1, 3);
-				view.addLog(10, 5, 1, 3);
-				view.add(new Vehicle("file:src/main/resources/assets/car1.png", 10, 11, 0.5, 1));
-				
-				view.addText("\nlevel 1", TextColor.YELLOW, 5, 0);
-				
-				End end3 = new End(0, 1);
-				view.add(end3);
-				End end4 = new End(6, 1);
-				view.add(end4);
-				End end5 = new End(13, 1);
-				view.add(end5);
-				
-				Frog frog2 = new Frog();
-				view.add(frog2);
-				view.setFrog(frog2);
-				
-				view.endList.add(end3);
-				view.endList.add(end4);
-				view.endList.add(end5);
+				level2(level);
 				break;
 		}
 		
+	}
+	
+	public static void level1(Level level) {
+		level.addRow("file:src/main/resources/assets/tile_water.png", 0, false);
+		level.addRow("file:src/main/resources/assets/tile_end_top.png", 1, false);
+		level.addRow("file:src/main/resources/assets/tile_end_bottom.png", 2, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 3, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 4, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 5, false);
+		level.addRow("file:src/main/resources/assets/tile_grass.png", 6, true);
+		level.addRow("file:src/main/resources/assets/tile_road.png", 7, true);
+		level.addRow("file:src/main/resources/assets/tile_road.png", 8, true);
+		level.addRow("file:src/main/resources/assets/tile_road.png", 9, true);
+		level.addRow("file:src/main/resources/assets/tile_road.png", 10, true);
+		level.addRow("file:src/main/resources/assets/tile_road.png", 11, true);
+		level.addRow("file:src/main/resources/assets/tile_road.png", 12, true);
+		level.addRow("file:src/main/resources/assets/tile_grass.png", 13, true);
+		level.addTurtles(0, 3, -1, 3);
+		level.addTurtles(6, 3, -1, 3);
+		level.addLog(2, 4, 1.5, 5);
+		level.addLog(9, 4, 1.5, 5);
+		level.addLog(0, 5, 1, 3);
+		level.addLog(5, 5, 1, 3);
+		level.addLog(10, 5, 1, 3);
+		level.add(new Vehicle("file:src/main/resources/assets/car1.png", 10, 11, -1, 1));
+		level.add(new Vehicle("file:src/main/resources/assets/car1.png", 10, 11, -1, 1));
+		
+		level.addText("\nlevel 1", TextColor.YELLOW, 5, 0);
+		
+		End end = new End(3, 1);
+		level.add(end);
+		End end2 = new End(9, 1);
+		level.add(end2);
+		
+		Frog frog = new Frog();
+		level.add(frog);
+		level.setFrog(frog);
+		
+		level.endList.add(end);
+		level.endList.add(end2);
+	}
+	
+	public static void level2(Level level) {
+		level.addRow("file:src/main/resources/assets/tile_water.png", 0, false);
+		level.addRow("file:src/main/resources/assets/tile_end_top.png", 1, false);
+		level.addRow("file:src/main/resources/assets/tile_end_bottom.png", 2, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 3, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 4, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 5, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 6, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 7, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 8, false);
+		level.addRow("file:src/main/resources/assets/tile_water.png", 9, false);
+		level.addRow("file:src/main/resources/assets/tile_grass.png", 10, true);
+		level.addRow("file:src/main/resources/assets/tile_road.png", 11, true);
+		level.addRow("file:src/main/resources/assets/tile_road.png", 12, true);
+		level.addRow("file:src/main/resources/assets/tile_grass.png", 13, true);
+		level.addWetTurtles(0, 3, -1, 3);
+		level.addTurtles(6, 3, -1, 3);
+		level.addLog(2, 4, 1.5, 3);
+		level.addLog(0, 5, 1, 3);
+		level.addLog(5, 5, 1, 3);
+		level.addLog(10, 5, 1, 3);
+		level.addWetTurtles(0, 6, 1.3, 5);
+		level.addLog(10, 6, 1.3, 3);
+		level.addLog(5, 7, -1.5, 2);
+		level.addWetTurtles(5, 8, 2, 7);
+		level.addLog(1, 9, -3, 3);
+		
+		level.addText("\nlevel 2", TextColor.YELLOW, 5, 0);
+		
+		End end = new End(0, 1);
+		level.add(end);
+		End end2 = new End(6, 1);
+		level.add(end2);
+		End end3 = new End(12, 1);
+		level.add(end3);
+		
+		Frog frog = new Frog();
+		level.add(frog);
+		level.setFrog(frog);
+		
+		level.endList.add(end);
+		level.endList.add(end2);
+		level.endList.add(end3);
 	}
 }

@@ -9,8 +9,8 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
+import main.java.controller.BoundsController;
 import main.java.controller.CollisionController;
-import main.java.model.Bounds;
 import main.java.model.Tile;
 import main.java.model.World;
 import main.java.util.Direction;
@@ -32,6 +32,7 @@ public class Frog extends Actor{
 	ArrayList<End> inter = new ArrayList<End>();
 	boolean forceStopMove = false;
 	boolean doneFlag = false;
+	public int gainScore = 0;
 	
 	public void playJumpSound() {
 		String musicFile = "src/main/resources/assets/audio/jump.wav"; 
@@ -78,7 +79,7 @@ public class Frog extends Actor{
 	public void tryMove(Direction dir) {
 		if (!isMoving && !isDying) {
 			setDirection(dir);
-			if (Bounds.canMoveInDirection(this, dir) && !isMoving) {
+			if (BoundsController.canMoveInDirection(this, dir) && !isMoving) {
 				playJumpSound();
 				moveGrid.start();
 			}
@@ -265,6 +266,7 @@ public class Frog extends Actor{
 	@Override
 	public void act(long now) {
 		if (CollisionController.getCollidedActors(this, Vehicle.class).size() > 0 && !isDying) {
+			gainScore -= -50;
 			death.start();
 		}
 		
@@ -277,6 +279,7 @@ public class Frog extends Actor{
 		} else if (tiles.size() > 0) {
 			for (int i = 0; i < tiles.size(); i++) {
 				if (!isMoving && !tiles.get(i).isSafe) {
+					gainScore -= 50;
 					deathWater.start();
 				}
 			}
@@ -287,6 +290,7 @@ public class Frog extends Actor{
 		if (collidedEnds.size() > 0) {
 			for (int i = 0; i < collidedEnds.size(); i ++) {
 				collidedEnds.get(i).setActivated(true);
+				gainScore += 100;
 				playGoalSound();
 			}
 			
@@ -302,7 +306,7 @@ public class Frog extends Actor{
 			}
 		}
 		
-		if (Bounds.isOutOfBounds(this)) {
+		if (BoundsController.isOutOfBounds(this)) {
 			death.start();
 		}
 		
