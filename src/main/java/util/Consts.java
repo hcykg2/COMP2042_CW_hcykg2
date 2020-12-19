@@ -82,7 +82,7 @@ public class Consts {
 				put("x_yellow", "file:src/main/resources/assets/char/char_yellow_x.png");
 				put("y_yellow", "file:src/main/resources/assets/char/char_yellow_y.png");
 				put("z_yellow", "file:src/main/resources/assets/char/char_yellow_z.png");
-				put("-_yellow", "file:src/main/resources/assets/char/char_yellow_-.png");
+				put("-_yellow", "file:src/main/resources/assets/char/char_yellow_hyphen.png");
 			}
 		};
 }

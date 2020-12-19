@@ -14,13 +14,15 @@ import main.java.util.Consts;
 import main.java.util.Levels;
 import main.java.model.Level;
 import main.java.model.ScoreView;
+import main.java.model.ScoreboardView;
 import main.java.view.ViewManager;
 
-// scoring, switch screens,
 public class GameController {
-	private int score;
+	private int lastScore = 0;
+	private int score = 1000;
 	private View currentView;
 	private ViewManager viewManager;
+	private int currentLevel = 0;
 	
 	public GameController(ViewManager viewManager) {
 		this.viewManager = viewManager;
@@ -39,7 +41,7 @@ public class GameController {
 		} else {
 			if (StartMenu.class.isInstance(currentView)) {
 				playStartSound();
-				currentView.wipe2();
+				currentView.setIsDone(true);
 			}
 		}
     }
@@ -49,9 +51,24 @@ public class GameController {
 
 		@Override
 		public void handle(long arg0) {
+			i++;
 			if (currentView.getIsDone()) {
-				newView();
-				currentView.wipe();
+				currentView.transitionOut();
+				
+			}
+			if (currentView.readyForNextView()) {
+				if(Level.class.isInstance(currentView)) {
+					currentView.stop();
+					currentView = new ScoreView(lastScore, score);
+					Scene currentScene = new Scene(currentView, World.getGridSize() * World.getGridCountX(), World.getGridSize() * World.getGridCountY());
+					viewManager.getStage().setScene(currentScene);
+				} else if (ScoreView.class.isInstance(currentView) || StartMenu.class.isInstance(currentView)) {
+					newView();
+				}
+				currentView.transitionIn();
+			}
+			if (i % 3000 == 0 && score > 0) {
+				addScore(-100);
 			}
 		}
 	};
@@ -69,10 +86,9 @@ public class GameController {
 	}
 	
 	public void newView() {
-		currentView.stop();
 		Level newLevel = new Level(6, 13);
 		currentView = (View) newLevel;
-		Levels.initLevel1(newLevel);
+		Levels.initLevel(newLevel, currentLevel);
 		Scene currentScene = new Scene(newLevel, World.getGridSize() * World.getGridCountX(), World.getGridSize() * World.getGridCountY());
 		viewManager.getStage().setScene(currentScene);
 		

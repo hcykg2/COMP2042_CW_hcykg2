@@ -264,15 +264,15 @@ public class Frog extends Actor{
 	
 	@Override
 	public void act(long now) {
-		if (CollisionController.getCollidedActors(getView(), this, Vehicle.class).size() > 0 && !isDying) {
+		if (CollisionController.getCollidedActors(this, Vehicle.class).size() > 0 && !isDying) {
 			death.start();
 		}
 		
-		ArrayList<Tile> tiles = CollisionController.isStandingOnTile(getView(), this);
+		ArrayList<Tile> tiles = CollisionController.getStandingOnTiles(this);
 		
-		if (CollisionController.isStandingOnStandable(getView(), this).size() > 0 && !isDying) {
-			double speed = CollisionController.isStandingOn(getView(), this, Actor.class).get(0).getSpeed();
-			double speedMultiplier = CollisionController.isStandingOn(getView(), this, Actor.class).get(0).getSpeedMultiplier();
+		if (CollisionController.getStandingOnStandableTiles(this).size() > 0 && !isDying) {
+			double speed = CollisionController.getStandingOnActors(this, Actor.class).get(0).getSpeed();
+			double speedMultiplier = CollisionController.getStandingOnActors(this, Actor.class).get(0).getSpeedMultiplier();
 			move(speed * speedMultiplier, 0);
 		} else if (tiles.size() > 0) {
 			for (int i = 0; i < tiles.size(); i++) {
@@ -282,7 +282,7 @@ public class Frog extends Actor{
 			}
 		}
 		
-		ArrayList<End> collidedEnds = CollisionController.getCollidedEnds(getView(), this);
+		ArrayList<End> collidedEnds = CollisionController.getCollidedEnds(this);
 		
 		if (collidedEnds.size() > 0) {
 			for (int i = 0; i < collidedEnds.size(); i ++) {
@@ -307,8 +307,8 @@ public class Frog extends Actor{
 		}
 		
 		if (Level.class.isInstance(getView()) && getView().activatedEnds >= getView().endList.size() && doneFlag == false) {
+			getView().setIsDone(true);
 			doneFlag = true;
-			getView().wipe2();
 		}
 		
 	}

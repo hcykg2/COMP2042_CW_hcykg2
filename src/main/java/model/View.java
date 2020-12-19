@@ -11,6 +11,11 @@ import javafx.scene.media.MediaPlayer;
 import main.java.model.actor.End;
 import main.java.model.actor.Frog;
 
+/**
+ * Base class for views. A view is a pane that is displayed on screen and can contain any nodes.
+ * @author Kelvin
+ *
+ */
 public class View extends World{
 	
 	public int beginX = 0;
@@ -20,18 +25,12 @@ public class View extends World{
 	public final ArrayList<End> endList = new ArrayList<End>();
 	public int activatedEnds = 0;
 	protected boolean isDone = false;
+	ImageView blank;
+	private boolean nextView = false;
 	
 	@Override
 	public void act(long now) {
 		
-	}
-
-	public View() {
-	}
-	
-	public View(int x, int y) {
-		beginX = x;
-		beginY = y;
 	}
 	
 	public void playMusic() {
@@ -62,6 +61,14 @@ public class View extends World{
 		isDone = done;
 	}
 	
+	public boolean readyForNextView() {
+		return nextView;
+	}
+	
+	public void setNextView(boolean bool) {
+		nextView = bool;
+	}
+	
     AnimationTimer wipeTimer = new AnimationTimer() {
 		@Override
 		public void handle(long arg0) {
@@ -72,8 +79,7 @@ public class View extends World{
 			}
 		}
     };
-
-    ImageView blank;
+    
     public void createWipe2() {
     	wipeTimer2 = new AnimationTimer() {
         	@Override
@@ -81,7 +87,7 @@ public class View extends World{
         		if (blank.getY() > 0) {
         			blank.setY(blank.getY() - 10);
         		} else {
-        			setIsDone(true);
+        			setNextView(true);
         			stop();
         		}
         	}
@@ -89,7 +95,7 @@ public class View extends World{
     }
     AnimationTimer wipeTimer2;
     
-    public void wipe() {
+    public void transitionIn() {
     	blank = new ImageView(new Image("file:src/main/resources/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
     	getChildren().add(blank);
     	blank.setX(0);
@@ -97,7 +103,7 @@ public class View extends World{
     	wipeTimer.start();
     }
     
-    public void wipe2() {
+    public void transitionOut() {
     	blank = new ImageView(new Image("file:src/main/resources/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
     	createWipe2();
     	getChildren().add(blank);

@@ -11,6 +11,11 @@ import javafx.scene.media.Media;
 import main.java.util.TextColor;
 import main.java.model.GameChar;
 
+/**
+ * View for displaying the current score of the player
+ * @author Kelvin
+ *
+ */
 public class ScoreView extends View {
 	ArrayList<GameChar> scoreNums = new ArrayList<GameChar>();
 	ArrayList<GameChar> text = new ArrayList<GameChar>();
@@ -18,12 +23,14 @@ public class ScoreView extends View {
 	AnimationTimer textTimer;
 	boolean highScoreFlag = false;
 	
-	public ScoreView(int init, int target, boolean highScore) {
-		boolean highScoreFlag = true;
-		blank = new ImageView(new Image("file:src/main/resources/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
-		getChildren().add(blank);
-    	blank.setX(0);
-    	blank.setY(0);
+	/**
+	 * 
+	 * @param init Initial score to display
+	 * @param target Final score to display
+	 * @param highScore If true, display blinking "high score" text above score
+	 */
+	public ScoreView(int init, int target) {
+		setBackground();
     	scoreNums = addText(" 000000", TextColor.YELLOW, 5, 7);
     	text = addText(" high score", TextColor.YELLOW, 4, 6);
     	
@@ -34,21 +41,28 @@ public class ScoreView extends View {
     	incrementScore(init, target);
 	}
 	
-	public void playBlip() {
+	private void setBackground() {
+		blank = new ImageView(new Image("file:src/main/resources/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
+		getChildren().add(blank);
+    	blank.setX(0);
+    	blank.setY(0);
+	}
+	
+	private void playBlip() {
 		String musicFile = "src/main/resources/assets/audio/blip.wav"; 
 		Media sound = new Media(new File(musicFile).toURI().toString());
 		AudioClip mediaPlayer = new AudioClip(sound.getSource());
 	    mediaPlayer.play();
 	}
 	
-	public void playScoreSound() {
+	private void playScoreSound() {
 		String musicFile = "src/main/resources/assets/audio/score.wav"; 
 		Media sound = new Media(new File(musicFile).toURI().toString());
 		AudioClip mediaPlayer = new AudioClip(sound.getSource());
 	    mediaPlayer.play();
 	}
 	
-	public void setScore(int score) {
+	private void setScore(int score) {
 		int temp = 0;
 		int digits = scoreNums.size();
 		for (int i = 0; i < digits; i++) {
@@ -57,7 +71,7 @@ public class ScoreView extends View {
 		}
 	}
 	
-	public void createIncrementTimer(int init, int target) {
+	private void createIncrementTimer(int init, int target) {
 		incrementTimer = new AnimationTimer() {
 			int i = 0;
 			
@@ -73,50 +87,29 @@ public class ScoreView extends View {
 						playBlip();
 					}
 				} else {
-					playScoreSound();
-					if (highScoreFlag) {
-						blinkText();
-					} else {
-						
-					}
-					stop();
-				}
-			}
-		};
-	}
-	
-	public void createTextTimer() {
-		textTimer = new AnimationTimer() {
-			int i = 0;
-			int time = 180;
-			double opacity = 0;
-			@Override
-			public void handle(long now) {
-				if (i % 30 == 0) {
-					for(int i = 0; i < text.size(); i++) {
-						if (text.get(i).getOpacity() == 1) {
-							opacity = 0;
-						} else {
-							opacity = 1;
+					AnimationTimer wait = new AnimationTimer() {
+						int i = 0;
+						@Override
+						public void handle(long arg0) {
+							if (i <= 180) {
+								i++;
+							} else {
+								i = 0;
+								setIsDone(true);
+								stop();
+							}
 						}
-						text.get(i).setOpacity(opacity);
-					}
-				} else if (i >= time) {
-					i = 0;
-					stop();
+						
+					};
+					playScoreSound();
+					wait.start();
 				}
-				i++;
 			}
 		};
 	}
 	
-	public void incrementScore(int init, int target) {
+	private void incrementScore(int init, int target) {
 		createIncrementTimer(init, target);
 		incrementTimer.start();
-	}
-	
-	public void blinkText() {
-		createTextTimer();
-		textTimer.start();
 	}
 }
