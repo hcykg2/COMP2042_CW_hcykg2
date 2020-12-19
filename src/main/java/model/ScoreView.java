@@ -80,13 +80,26 @@ public class ScoreView extends View {
 				if (i == 0) {
 					setScore(init);
 				}
-				if (init + i <= target) {
+				if (init + i != target) {
 					setScore(init + i);
-					i++;
+					if(target > init) {
+						i++;
+					} else {
+						i--;
+					}
 					if (i % 10 == 0) {
 						playBlip();
 					}
 				} else {
+					if (init + i != target) {
+						setScore(init + i);
+						if(target > init) {
+							i++;
+						} else {
+							i--;
+						}
+					}
+					setScore(init + i);
 					AnimationTimer wait = new AnimationTimer() {
 						int i = 0;
 						@Override

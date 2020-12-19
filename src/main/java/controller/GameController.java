@@ -17,6 +17,11 @@ import main.java.model.ScoreView;
 import main.java.model.ScoreboardView;
 import main.java.view.ViewManager;
 
+/**
+ * Handles scoring, controls and level changing
+ * @author Kelvin
+ *
+ */
 public class GameController {
 	private int lastScore = 0;
 	private int score = 0;
@@ -75,22 +80,16 @@ public class GameController {
 			if (currentView.getFrog() != null) {
 				score += currentView.getFrog().gainScore;
 				currentView.getFrog().gainScore = 0;
+				if (score < 0) {
+					score = 0;
+				}
 			}
 		}
 	};
 	
-	public int getScore() {
-		return score;
-	}
-	
-	public void setScore(int score) {
-		this.score = score;
-	}
-	
-	public void addScore(int score) {
-		this.score += score;
-	}
-	
+	/**
+	 * Initializes the next level
+	 */
 	public void newLevel() {
 		Level newLevel = new Level(6, 13);
 		currentView = (View) newLevel;
@@ -103,6 +102,9 @@ public class GameController {
 		currentScene.addEventHandler(KeyEvent.KEY_PRESSED, this::keyPressed);
 	}
 	
+	/**
+	 * Plays "whoosh" sound
+	 */
 	public void playStartSound() {
 		String musicFile = "src/main/resources/assets/audio/start.wav"; 
 		Media sound = new Media(new File(musicFile).toURI().toString());

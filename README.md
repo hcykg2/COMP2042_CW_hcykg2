@@ -35,13 +35,6 @@
 
 
 
-### Smooth frog movement
-
-- Gives a better sense of movement
-- Better user experience
-
-
-
 ### Added methods for dynamically sized turtles and logs
 
 - Done in World class

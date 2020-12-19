@@ -15,11 +15,7 @@ public class StartMenu extends View{
 	AnimationTimer startViewTimer;
 	
 	public StartMenu() {
-		blank = new ImageView(new Image("file:src/main/resources/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
-		getChildren().add(blank);
-    	blank.setX(0);
-    	blank.setY(0);
-    	
+		setBackground();
     	ImageView title = new ImageView(new Image("file:src/main/resources/assets/title_frogger.png", 7 * World.getGridSize(), World.getGridSize(), true, true));
     	getChildren().add(title);
     	title.setX(3.5 * World.getGridSize());
@@ -53,6 +49,13 @@ public class StartMenu extends View{
 		};
 		
 		textBlinkAnimation.start();
+	}
+	
+	public void setBackground() {
+		blank = new ImageView(new Image("file:src/main/resources/assets/tile_water.png", World.getGridCountX() * getGridSize(), getGridCountY() * getGridSize(), false, true));
+		getChildren().add(blank);
+    	blank.setX(0);
+    	blank.setY(0);
 	}
 	
 	AnimationTimer textBlinkAnimation = new AnimationTimer() {

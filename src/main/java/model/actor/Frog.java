@@ -20,7 +20,6 @@ public class Frog extends Actor{
 	ArrayList<Image> waterDeathSprites = new ArrayList<Image>();
 	Image imgW1;
 	Image imgW2;
-	private int frogID;
 	private double speed = 5;
 	private double speedMultiplier;
 	boolean isStandable = false;
@@ -33,31 +32,6 @@ public class Frog extends Actor{
 	boolean forceStopMove = false;
 	boolean doneFlag = false;
 	public int gainScore = 0;
-	
-	public void playJumpSound() {
-		String musicFile = "src/main/resources/assets/audio/jump.wav"; 
-		Media sound = new Media(new File(musicFile).toURI().toString());
-		AudioClip mediaPlayer = new AudioClip(sound.getSource());
-	    mediaPlayer.play();
-	}
-	
-	public void playGoalSound() {
-		String musicFile = "src/main/resources/assets/audio/goal.wav"; 
-		Media sound = new Media(new File(musicFile).toURI().toString());
-		AudioClip mediaPlayer = new AudioClip(sound.getSource());
-	    mediaPlayer.play();
-	}
-	
-	public void playDeathSound() {
-		String musicFile = "src/main/resources/assets/audio/death.wav"; 
-		Media sound = new Media(new File(musicFile).toURI().toString());
-		AudioClip mediaPlayer = new AudioClip(sound.getSource());
-	    mediaPlayer.play();
-	}
-	
-	public double getSpeed() {
-		return speed;
-	}
 	
 	public Frog() {
 		imgW1 = new Image("file:src/main/resources/assets/frogUp.png", imgSize, imgSize, true, true);
@@ -75,7 +49,45 @@ public class Frog extends Actor{
 		setGridX(6);
 		setGridY(13);
 	}
+
+	/**
+	 * Plays jump sound
+	 */
+	public void playJumpSound() {
+		String musicFile = "src/main/resources/assets/audio/jump.wav"; 
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		AudioClip mediaPlayer = new AudioClip(sound.getSource());
+	    mediaPlayer.play();
+	}
 	
+	/**
+	 * Plays goal sound
+	 */
+	public void playGoalSound() {
+		String musicFile = "src/main/resources/assets/audio/goal.wav"; 
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		AudioClip mediaPlayer = new AudioClip(sound.getSource());
+	    mediaPlayer.play();
+	}
+	
+	/**
+	 * Plays death sound
+	 */
+	public void playDeathSound() {
+		String musicFile = "src/main/resources/assets/audio/death.wav"; 
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		AudioClip mediaPlayer = new AudioClip(sound.getSource());
+	    mediaPlayer.play();
+	}
+	
+	public double getSpeed() {
+		return speed;
+	}
+	
+	/**
+	 * Attempts to move frog. Fails if frog is already moving, dying or if the direction will move it out of bounds.
+	 * @param dir Direction to move
+	 */
 	public void tryMove(Direction dir) {
 		if (!isMoving && !isDying) {
 			setDirection(dir);
@@ -85,8 +97,6 @@ public class Frog extends Actor{
 			}
 		}
 	}
-
-	// GRID MOVEMENT
 	
 	AnimationTimer moveGrid = new AnimationTimer() {
 		int targetGrid;
@@ -315,10 +325,6 @@ public class Frog extends Actor{
 			doneFlag = true;
 		}
 		
-	}
-	
-	public int getID() {
-		return frogID;
 	}
 	
 	public boolean getIsMoving() {

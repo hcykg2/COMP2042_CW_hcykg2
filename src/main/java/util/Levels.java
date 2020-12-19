@@ -79,7 +79,7 @@ public class Levels {
 		level.addRow("file:src/main/resources/assets/tile_grass.png", 13, true);
 		level.addWetTurtles(0, 3, -1, 3);
 		level.addTurtles(6, 3, -1, 3);
-		level.addLog(2, 4, 1.5, 3);
+		level.addLog(2, 4, 1.5, 10);
 		level.addLog(0, 5, 1, 3);
 		level.addLog(5, 5, 1, 3);
 		level.addLog(10, 5, 1, 3);
