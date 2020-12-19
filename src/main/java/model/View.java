@@ -73,7 +73,7 @@ public class View extends World{
 		@Override
 		public void handle(long arg0) {
 			if (blank.getY() > -World.getGridSize() * World.getGridSize()) {
-				blank.setY(blank.getY() - 10);
+				blank.setY(blank.getY() - 20);
 			} else {
 				stop();
 			}
@@ -85,7 +85,7 @@ public class View extends World{
         	@Override
         	public void handle(long arg0) {
         		if (blank.getY() > 0) {
-        			blank.setY(blank.getY() - 10);
+        			blank.setY(blank.getY() - 20);
         		} else {
         			setNextView(true);
         			stop();

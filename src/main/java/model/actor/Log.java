@@ -8,7 +8,7 @@ import main.java.model.World;
 
 public class Log extends Actor {
 
-	private double speed = 0.5;
+	private double speed = 1;
 	private double speedMultiplier;
 	boolean isStandable = true;
 	ArrayList<Image> sprites = new ArrayList<Image>(); 

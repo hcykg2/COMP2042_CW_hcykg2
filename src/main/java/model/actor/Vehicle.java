@@ -5,7 +5,7 @@ import main.java.controller.BoundsController;
 import main.java.model.World;
 
 public class Vehicle extends Actor {
-	private double speed = 1;
+	private double speed = 2;
 	private double speedMultiplier;
 	boolean isStandable = false;
 	

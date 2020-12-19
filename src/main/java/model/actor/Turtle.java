@@ -9,7 +9,7 @@ import main.java.model.World;
 
 public class Turtle extends Actor {
 	ArrayList<Image> sprites = new ArrayList<Image>();
-	private double speed = 0.5;
+	private double speed = 1;
 	private double speedMultiplier;
 	boolean isStandable = true;
 	int i = 1;

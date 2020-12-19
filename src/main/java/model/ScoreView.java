@@ -94,9 +94,9 @@ public class ScoreView extends View {
 					if (init + i != target) {
 						setScore(init + i);
 						if(target > init) {
-							i++;
+							i+=2;
 						} else {
-							i--;
+							i-=2;
 						}
 					}
 					setScore(init + i);
@@ -107,7 +107,7 @@ public class ScoreView extends View {
 							if (i == 0) {
 								playScoreSound();
 							}
-							if (i <= 180) {
+							if (i <= 90) {
 								i++;
 							} else {
 								i = 0;

@@ -20,7 +20,7 @@ public class Frog extends Actor{
 	ArrayList<Image> waterDeathSprites = new ArrayList<Image>();
 	Image imgW1;
 	Image imgW2;
-	private double speed = 5;
+	private double speed = 10;
 	private double speedMultiplier;
 	boolean isStandable = false;
 	boolean isMoving = false;
@@ -176,7 +176,7 @@ public class Frog extends Actor{
 	};
 	
 	AnimationTimer postMoveGrid = new AnimationTimer() {
-		int time = 15;
+		int time = 7;
 		int i = time;
 		@Override
 		public void handle(long now) {
@@ -208,7 +208,7 @@ public class Frog extends Actor{
 	AnimationTimer death = new AnimationTimer() {
 		int i = 0;
 		int sprite = -1;
-		int time = 60;
+		int time = 30;
 		@Override
 		public void handle(long arg0) {
 			if (sprite == -1) {
@@ -242,7 +242,7 @@ public class Frog extends Actor{
 	AnimationTimer deathWater = new AnimationTimer() {
 		int i = 0;
 		int sprite = -1;
-		int time = 60;
+		int time = 30;
 		@Override
 		public void handle(long arg0) {
 			if (sprite == -1) {
